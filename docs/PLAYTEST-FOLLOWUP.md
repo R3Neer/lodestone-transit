@@ -33,9 +33,9 @@ Retain the full vanilla lodestone body and its recognizable stone patterns. Add 
 
 Keep the compass outline, metal rim, dark dial and prominent moving needle. Use a restrained amethyst accent at the cardinal points of the rim and a small ender-green detail around the needle pivot. The dial must remain readable at normal hotbar size. Avoid a large eye graphic covering the needle.
 
-For the dimensional version, preserve the same silhouette and dial; use a darker rim, pale end-stone-colored corner accents and a double amethyst notch so the distinction is not color alone. Recovery should use the recovery compass's visual language and death-target needle behavior, while retaining the appropriate normal/dimensional rim.
+For the dimensional version, preserve the same silhouette and dial; use a darker rim, pale end-stone-colored corner accents and a double amethyst notch so the distinction is not color alone. After the user's clarification, Recovery uses exactly the ordinary device artwork and 3D model, with a recovery default name and death-target needle behavior.
 
-The finished overlays are hand-authored 16-pixel assets. All 32 compass frames and the recovery frames reference vanilla art. No AI art or third-party artwork is redistributed.
+The finished overlays are hand-authored 16-pixel assets. All variants use the same 32 vanilla compass frames. No AI art or third-party artwork is redistributed.
 
 ## Implemented station design
 

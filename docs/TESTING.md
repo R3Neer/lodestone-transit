@@ -10,11 +10,13 @@ and the current Fabric 26.2 example project, rather than old mapping tutorials.
 ## Automated tests
 
 `gradlew.bat build` compiles the distributable and sources JAR, runs four JUnit
-landing-score tests and runs 25 required dedicated-server GameTests (24 mod tests
+landing-score tests and runs 26 required dedicated-server GameTests (25 mod tests
 plus Fabric's framework test). The suite covers:
 
 - Loaded recipes through a real crafting table, taking and shift-clicking results;
-  recipe-book displays and placement ingredients; distinct recovery names/models.
+  recipe-book displays and placement ingredients; recovery default names with the ordinary model.
+- Creative spawn defaults, legacy missing-destination repair, broken-tracker
+  preservation and recovery appearance migration without metadata loss.
 - Both portable variants, both hands, ordinary/calibrated rebinding, preserved fuel
   and manual names, unavailable destinations and calibrated anchor destruction.
 - Compass, recovery and spawn crafting; component/name transfer; station charges;
@@ -34,7 +36,10 @@ plus Fabric's framework test). The suite covers:
 - Automatic names, anchor rename and manual-name precedence.
 
 `gradlew.bat runClientGameTest` runs one real-client integrated-world scenario.
-It checks the server-to-client anchor name and its subsequent rename, renders
+It checks actual client-received station counter messages and distinct empty/full
+sound events, rejected insertion without item loss, and preservation of a travel
+failure reason alongside the remaining count. It also checks the server-to-client
+anchor name and its subsequent rename, renders
 the lodestone, both station variants and all new items, and takes world/inventory
 screenshots. The screenshots are visually inspected for model, texture and atlas errors.
 With `-Pp1klResourcePack=C:/path/to/p1kl.zip`, Gradle copies the locally supplied
@@ -46,7 +51,7 @@ references and unrelated item resources on 26.2; those upstream warnings are not
 a claim of compatibility for every item in that pack. This is automated client verification, not a human
 gameplay session.
 
-The optional profile uses the same 25-test suite with these actual installed JARs:
+The optional profile uses the same 26-test suite with these actual installed JARs:
 
 | Mod | Verified version |
 | --- | --- |

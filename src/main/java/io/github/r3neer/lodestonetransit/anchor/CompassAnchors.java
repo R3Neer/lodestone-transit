@@ -12,8 +12,12 @@ public final class CompassAnchors {
     public static void update(ItemStack stack, ServerLevel level) {
         var destination = stack.get(LodestoneTransit.DESTINATION);
         var tracker = stack.get(DataComponents.LODESTONE_TRACKER);
-        if (destination == null && tracker != null) {
+        if ((destination == null || destination.kind() == TeleportDestination.Kind.WORLD_SPAWN) && tracker != null) {
             destination = new TeleportDestination(TeleportDestination.Kind.LODESTONE_ANCHOR, Optional.empty(), tracker.target());
+        }
+        if (destination == null && stack.getItem() instanceof io.github.r3neer.lodestonetransit.item.TeleporterItem) {
+            destination = TeleportDestination.spawn();
+            stack.set(LodestoneTransit.DESTINATION, destination);
         }
         if (destination == null || destination.kind() != TeleportDestination.Kind.LODESTONE_ANCHOR) return;
         var registry = AnchorRegistry.get(level.getServer());

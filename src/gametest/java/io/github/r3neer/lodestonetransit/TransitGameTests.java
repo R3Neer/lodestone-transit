@@ -51,6 +51,28 @@ public final class TransitGameTests {
         check(TeleportResolver.resolveDetailed(player, player.getMainHandItem().get(LodestoneTransit.DESTINATION)).failure() == TravelMessage.ANCHOR_UNAVAILABLE, "calibrated destruction invalidates link");
         h.succeed();
     }
+    @GameTest(padding = 24) public void creativeDefaultsAndLegacyRecoveryAppearance(GameTestHelper h) {
+        var player = h.makeMockServerPlayerInLevel();
+        for (var item : List.of(LodestoneTransit.TELEPORTER, LodestoneTransit.DIMENSIONAL_TELEPORTER)) {
+            var device = new ItemStack(item);
+            check(device.get(LodestoneTransit.DESTINATION).equals(TeleportDestination.spawn()), "creative device targets spawn");
+            check(TeleportResolver.resolve(player, device.get(LodestoneTransit.DESTINATION)).equals(h.getLevel().getServer().getRespawnData().globalPos()), "target matches vanilla world spawn");
+            device.remove(LodestoneTransit.DESTINATION);
+            CompassAnchors.update(device, h.getLevel());
+            check(device.get(LodestoneTransit.DESTINATION).equals(TeleportDestination.spawn()), "older unconfigured device is repaired");
+            device.set(DataComponents.LODESTONE_TRACKER, new net.minecraft.world.item.component.LodestoneTracker(Optional.empty(), true));
+            CompassAnchors.update(device, h.getLevel());
+            check(TeleportResolver.resolveDetailed(player, device.get(LodestoneTransit.DESTINATION)).failure() == TravelMessage.ANCHOR_UNAVAILABLE, "broken tracker is not silently redirected to spawn");
+            device.set(LodestoneTransit.DESTINATION, TeleportDestination.death());
+            device.set(LodestoneTransit.CHARGES, 3);
+            device.set(DataComponents.CUSTOM_NAME, Component.literal("My recovery"));
+            device.set(DataComponents.ITEM_MODEL, LodestoneTransit.id("recovery_teleporter"));
+            io.github.r3neer.lodestonetransit.item.DeviceAppearance.update(device);
+            check(device.get(DataComponents.ITEM_MODEL).equals(net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(item)), "existing recovery uses normal model");
+            check(device.get(LodestoneTransit.DESTINATION).equals(TeleportDestination.death()) && device.get(LodestoneTransit.CHARGES) == 3 && device.getHoverName().getString().equals("My recovery"), "appearance migration preserves destination, fuel and manual name");
+        }
+        h.succeed();
+    }
     @GameTest(padding = 24) public void recipeBookMetadataAndRecoveryNames(GameTestHelper h) {
         for (var operation : List.of("teleporter", "recovery", "station", "dimensional_station", "upgrade", "core")) {
             var recipe = new TransitRecipe(operation);
@@ -58,7 +80,7 @@ public final class TransitGameTests {
         }
         var recovery = new TransitRecipe("recovery").assemble(grid(new ItemStack(Items.RECOVERY_COMPASS), Items.ENDER_EYE, true));
         check(recovery.getHoverName().getString().equals("Recovery Teleporter"), "dedicated recovery name");
-        check(recovery.get(DataComponents.ITEM_MODEL).equals(LodestoneTransit.id("recovery_teleporter")), "recovery needle model");
+        check(recovery.get(DataComponents.ITEM_MODEL).equals(LodestoneTransit.id("teleporter")), "recovery shares the normal device model");
         h.succeed();
     }
     @GameTest(padding = 24) public void loadedRecipesWorkThroughCraftingTable(GameTestHelper h) {

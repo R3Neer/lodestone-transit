@@ -9,6 +9,9 @@ import net.minecraft.world.phys.Vec3;
 /** Callers debit fuel before entering this service. No path refunds it. */
 public final class TeleportService {
     public static boolean attempt(ServerPlayer player, TeleportDestination destination, boolean dimensional) {
+        return attempt(player, destination, dimensional, -1);
+    }
+    public static boolean attempt(ServerPlayer player, TeleportDestination destination, boolean dimensional, int stationPearls) {
         boolean success = false;
         TravelMessage message = null;
         try {
@@ -32,7 +35,8 @@ public final class TeleportService {
             player.resetFallDistance(); player.resetCurrentImpulseContext();
             player.hurtServer(player.level(), player.damageSources().enderPearl(), 5.0F);
             feedback(player, success);
-            if (message != null) message.show(player);
+            if (stationPearls >= 0) FuelFeedback.station(player, stationPearls, message);
+            else if (message != null) message.show(player);
         }
     }
     public static void feedback(ServerPlayer player, boolean success) {

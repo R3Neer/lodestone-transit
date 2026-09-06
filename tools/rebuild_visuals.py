@@ -60,7 +60,7 @@ for dimensional_flag in (False,True):
     prefix = 'dimensional_' if dimensional_flag else ''
     for recovery in (False,True):
         name = prefix + ('recovery_' if recovery else '') + 'teleporter'
-        base = 'recovery_compass' if recovery else 'compass'
+        base = 'compass' # Recovery changes the default name and target, not the artwork.
         accent = prefix + 'teleporter_inlay'
         entries = []
         bridge_entries = []
@@ -157,6 +157,9 @@ for index,lang in enumerate(('en_us','es_es')):
     path = f'assets/{NS}/lang/{lang}.json'
     values = json.loads((ROOT/path).read_text(encoding='utf-8-sig'))
     values.update({f'transit.message.{key}':pair[index] for key,pair in MESSAGES.items()})
+    values.update({'transit.station.pearls':('Ender pearls: %s/16','Perlas de ender: %s/16')[index],
+                   'transit.container.empty':('Empty','Vacío')[index],
+                   'transit.container.full':('Full','Lleno')[index]})
     values.update({'block.lodestone_transit.calibrated_lodestone':('Calibrated Lodestone','Magnetita calibrada')[index],
                    'item.lodestone_transit.recovery_teleporter':('Recovery Teleporter','Teletransportador de recuperación')[index],
                    'item.lodestone_transit.dimensional_recovery_teleporter':('Dimensional Recovery Teleporter','Teletransportador dimensional de recuperación')[index]})

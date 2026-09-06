@@ -12,5 +12,7 @@ public enum TravelMessage {
 
     public Component text() { return Component.translatable("transit.message." + name().toLowerCase(java.util.Locale.ROOT)); }
     public void show(ServerPlayer player) { player.sendOverlayMessage(text()); }
-    public void fail(ServerPlayer player) { show(player); TeleportService.feedback(player, false); }
+    public void fail(ServerPlayer player) { show(player);
+        if (this == NO_FUEL || this == FUEL_FULL) FuelFeedback.sound(player, player.blockPosition(), this == FUEL_FULL, net.minecraft.sounds.SoundSource.PLAYERS);
+        else TeleportService.feedback(player, false); }
 }

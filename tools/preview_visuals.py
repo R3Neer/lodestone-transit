@@ -11,7 +11,7 @@ with zipfile.ZipFile(sys.argv[1]) as vanilla:
     draw = ImageDraw.Draw(sheet)
     labels = ['Vanilla','Teleporter','Dimensional','Recovery','Dim. recovery','Core']
     for i,label in enumerate(labels):
-        texture = base('item/'+('nether_star' if i == 5 else 'recovery_compass_16' if i in (3,4) else 'compass_16'))
+        texture = base('item/'+('nether_star' if i == 5 else 'compass_16'))
         if i: texture.alpha_composite(accent('item/'+('core_inlay' if i==5 else 'dimensional_teleporter_inlay' if i in (2,4) else 'teleporter_inlay')))
         sheet.paste(texture.resize((128,128),Image.Resampling.NEAREST),(i*160+16,30),texture.resize((128,128),Image.Resampling.NEAREST))
         sheet.paste(texture,(i*160+72,172),texture)

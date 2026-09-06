@@ -15,6 +15,14 @@ import net.minecraft.world.phys.Vec3;
 import java.util.*;
 
 public final class TransitClientGameTest implements FabricClientGameTest {
+    private static String overlay(net.minecraft.client.Minecraft client) {
+        try {
+            var field = net.minecraft.client.gui.Hud.class.getDeclaredField("overlayMessageString");
+            field.setAccessible(true);
+            var text = (Component) field.get(client.gui.hud);
+            return text == null ? "" : text.getString();
+        } catch (ReflectiveOperationException e) { throw new AssertionError(e); }
+    }
     @Override public void runTest(ClientGameTestContext context) {
         try (var singleplayer = context.worldBuilder().create()) {
             var anchorId = singleplayer.getServer().computeOnServer(server -> {
@@ -41,6 +49,47 @@ public final class TransitClientGameTest implements FabricClientGameTest {
             context.waitTicks(10);
             context.takeScreenshot("lodestone-transit-inventory");
             context.setScreen(() -> null);
+            var heard = new java.util.concurrent.ConcurrentLinkedQueue<String>();
+            net.minecraft.client.sounds.SoundEventListener listener = (sound, event, range) -> heard.add(sound.getIdentifier().toString());
+            context.runOnClient(client -> client.getSoundManager().addListener(listener));
+            for (int initial : new int[] {2, 16, 0, -1}) {
+                heard.clear();
+                context.waitTicks(2);
+                singleplayer.getServer().runOnServer(server -> {
+                    var level = server.overworld();
+                    var pos = new BlockPos(-2, 80, 0);
+                    var station = (io.github.r3neer.lodestonetransit.block.TeleportStationBlockEntity) level.getBlockEntity(pos);
+                    var player = server.getPlayerList().getPlayers().getFirst();
+                    station.setItem(0, initial == 0 ? ItemStack.EMPTY : new ItemStack(Items.ENDER_PEARL, initial == -1 ? 2 : initial));
+                    var hit = new net.minecraft.world.phys.BlockHitResult(Vec3.atCenterOf(pos), Direction.UP, pos, false);
+                    if (initial > 0) {
+                        var pearl = new ItemStack(Items.ENDER_PEARL);
+                        level.getBlockState(pos).useItemOn(pearl, level, player, net.minecraft.world.InteractionHand.MAIN_HAND, hit);
+                        if (station.getItem(0).getCount() != (initial == 16 ? 16 : 3) || pearl.getCount() != (initial == 16 ? 1 : 0)) throw new AssertionError("Incorrect station insertion or full-container consumption");
+                    } else {
+                        if (initial == -1) {
+                            var embedded = new ItemStack(LodestoneTransit.STATION);
+                            embedded.set(LodestoneTransit.DESTINATION, TeleportDestination.anchor(UUID.randomUUID()));
+                            station.preserveItem(embedded);
+                        }
+                        level.getBlockState(pos).useWithoutItem(level, player, hit);
+                    }
+                });
+                String expected = switch (initial) {
+                    case 2 -> "Ender pearls: 3/16";
+                    case 16 -> "Ender pearls: 16/16 · Full";
+                    case 0 -> "Ender pearls: 0/16 · Empty";
+                    default -> "Linked lodestone is no longer available. · Ender pearls: 1/16";
+                };
+                context.waitFor(client -> overlay(client).equals(expected));
+                if (initial == 16 || initial == 0) {
+                    String sound = initial == 16 ? "minecraft:item.bundle.insert_fail" : "minecraft:block.decorated_pot.insert_fail";
+                    context.waitFor(client -> heard.contains(sound));
+                    if (heard.contains("minecraft:block.respawn_anchor.deplete")) throw new AssertionError("Container rejection used teleport-failure sound");
+                }
+                context.takeScreenshot("station-feedback-" + initial);
+            }
+            context.runOnClient(client -> client.getSoundManager().removeListener(listener));
             var reload = new java.util.concurrent.atomic.AtomicReference<java.util.concurrent.CompletableFuture<Void>>();
             var selected = new java.util.concurrent.atomic.AtomicReference<List<String>>();
             var packIds = new java.util.concurrent.atomic.AtomicReference<List<String>>();

@@ -31,7 +31,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_16_in_hand"
+                  "model": "minecraft:item/compass_16_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -64,7 +64,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_17_in_hand"
+                  "model": "minecraft:item/compass_17_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -97,7 +97,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_18_in_hand"
+                  "model": "minecraft:item/compass_18_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -130,7 +130,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_19_in_hand"
+                  "model": "minecraft:item/compass_19_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -163,7 +163,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_20_in_hand"
+                  "model": "minecraft:item/compass_20_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -196,7 +196,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_21_in_hand"
+                  "model": "minecraft:item/compass_21_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -229,7 +229,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_22_in_hand"
+                  "model": "minecraft:item/compass_22_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -262,7 +262,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_23_in_hand"
+                  "model": "minecraft:item/compass_23_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -295,7 +295,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_24_in_hand"
+                  "model": "minecraft:item/compass_24_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -328,7 +328,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_25_in_hand"
+                  "model": "minecraft:item/compass_25_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -361,7 +361,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_26_in_hand"
+                  "model": "minecraft:item/compass_26_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -394,7 +394,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_27_in_hand"
+                  "model": "minecraft:item/compass_27_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -427,7 +427,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_28_in_hand"
+                  "model": "minecraft:item/compass_28_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -460,7 +460,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_29_in_hand"
+                  "model": "minecraft:item/compass_29_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -493,7 +493,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_30_in_hand"
+                  "model": "minecraft:item/compass_30_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -526,7 +526,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_31_in_hand"
+                  "model": "minecraft:item/compass_31_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -559,7 +559,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_00_in_hand"
+                  "model": "minecraft:item/compass_00_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -592,7 +592,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_01_in_hand"
+                  "model": "minecraft:item/compass_01_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -625,7 +625,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_02_in_hand"
+                  "model": "minecraft:item/compass_02_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -658,7 +658,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_03_in_hand"
+                  "model": "minecraft:item/compass_03_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -691,7 +691,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_04_in_hand"
+                  "model": "minecraft:item/compass_04_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -724,7 +724,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_05_in_hand"
+                  "model": "minecraft:item/compass_05_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -757,7 +757,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_06_in_hand"
+                  "model": "minecraft:item/compass_06_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -790,7 +790,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_07_in_hand"
+                  "model": "minecraft:item/compass_07_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -823,7 +823,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_08_in_hand"
+                  "model": "minecraft:item/compass_08_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -856,7 +856,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_09_in_hand"
+                  "model": "minecraft:item/compass_09_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -889,7 +889,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_10_in_hand"
+                  "model": "minecraft:item/compass_10_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -922,7 +922,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_11_in_hand"
+                  "model": "minecraft:item/compass_11_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -955,7 +955,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_12_in_hand"
+                  "model": "minecraft:item/compass_12_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -988,7 +988,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_13_in_hand"
+                  "model": "minecraft:item/compass_13_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -1021,7 +1021,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_14_in_hand"
+                  "model": "minecraft:item/compass_14_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -1054,7 +1054,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_15_in_hand"
+                  "model": "minecraft:item/compass_15_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -1087,7 +1087,7 @@
               "models": [
                 {
                   "type": "minecraft:model",
-                  "model": "minecraft:item/recovery_compass_16_in_hand"
+                  "model": "minecraft:item/compass_16_in_hand"
                 },
                 {
                   "type": "minecraft:model",
@@ -1119,7 +1119,7 @@
           "models": [
             {
               "type": "minecraft:model",
-              "model": "minecraft:item/recovery_compass_16_in_hand"
+              "model": "minecraft:item/compass_16_in_hand"
             },
             {
               "type": "minecraft:model",

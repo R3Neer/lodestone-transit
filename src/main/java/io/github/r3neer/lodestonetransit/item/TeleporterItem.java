@@ -18,7 +18,7 @@ import net.minecraft.world.level.Level;
 
 public final class TeleporterItem extends Item {
     public final boolean dimensional;
-    public TeleporterItem(Properties properties, boolean dimensional) { super(properties); this.dimensional = dimensional; }
+    public TeleporterItem(Properties properties, boolean dimensional) { super(properties.component(LodestoneTransit.DESTINATION, io.github.r3neer.lodestonetransit.teleport.TeleportDestination.spawn())); this.dimensional = dimensional; }
     @Override public InteractionResult use(Level level, Player player, InteractionHand hand) {
         if (!(player instanceof ServerPlayer serverPlayer)) return InteractionResult.SUCCESS;
         if (EquipReadiness.attemptedThisTick(serverPlayer)) return InteractionResult.SUCCESS;
@@ -30,7 +30,7 @@ public final class TeleporterItem extends Item {
                 stack.set(LodestoneTransit.CHARGES, fuel + 1); other.consume(1, player);
                 level.playSound(null, player.blockPosition(), SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.PLAYERS, .5f, 1.2f);
             }
-            if (fuel >= 4) TravelMessage.FUEL_FULL.show(serverPlayer);
+            if (fuel >= 4) TravelMessage.FUEL_FULL.fail(serverPlayer);
             return InteractionResult.SUCCESS;
         }
         if (!EquipReadiness.ready(serverPlayer, hand)) { TravelMessage.WARMING_UP.show(serverPlayer); return InteractionResult.SUCCESS; }

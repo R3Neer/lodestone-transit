@@ -38,5 +38,8 @@
   "transit.message.linked_calibrated": "Linked to calibrated lodestone.",
   "block.lodestone_transit.calibrated_lodestone": "Calibrated Lodestone",
   "item.lodestone_transit.recovery_teleporter": "Recovery Teleporter",
-  "item.lodestone_transit.dimensional_recovery_teleporter": "Dimensional Recovery Teleporter"
+  "item.lodestone_transit.dimensional_recovery_teleporter": "Dimensional Recovery Teleporter",
+  "transit.station.pearls": "Ender pearls: %s/16",
+  "transit.container.empty": "Empty",
+  "transit.container.full": "Full"
 }

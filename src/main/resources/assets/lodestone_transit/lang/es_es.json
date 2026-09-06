@@ -38,5 +38,8 @@
   "transit.message.linked_calibrated": "Enlazado a una magnetita calibrada.",
   "block.lodestone_transit.calibrated_lodestone": "Magnetita calibrada",
   "item.lodestone_transit.recovery_teleporter": "Teletransportador de recuperación",
-  "item.lodestone_transit.dimensional_recovery_teleporter": "Teletransportador dimensional de recuperación"
+  "item.lodestone_transit.dimensional_recovery_teleporter": "Teletransportador dimensional de recuperación",
+  "transit.station.pearls": "Perlas de ender: %s/16",
+  "transit.container.empty": "Vacío",
+  "transit.container.full": "Lleno"
 }

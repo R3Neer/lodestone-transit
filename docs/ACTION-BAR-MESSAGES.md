@@ -27,3 +27,32 @@ All messages are localized action-bar overlays, never chat. Linking/loading is n
 | Link to calibrated lodestone | Linked to calibrated lodestone. | Enlazado a una magnetita calibrada. |
 
 Successful travel keeps its existing sound and particles. No generic failure message should overwrite a more specific reason. Unexpected programming exceptions must remain visible in logs rather than being silently swallowed.
+
+## Container feedback revision (2026-09-06)
+
+Specified before implementation: station interactions report the stored pearls,
+not the pearls in the player's inventory. Insertion reports the resulting count;
+travel reports the count after debit. A specific travel failure remains in the
+same overlay alongside the count, rather than being overwritten by it.
+
+| Situation | English | Spanish | Sound |
+| --- | --- | --- | --- |
+| Insert / successful use | Ender pearls: 3/16 | Perlas de ender: 3/16 | Existing insertion / travel sound |
+| Use empty station | Ender pearls: 0/16 · Empty | Perlas de ender: 0/16 · Vacío | Decorated pot insert fail |
+| Insert into full station | Ender pearls: 16/16 · Full | Perlas de ender: 16/16 · Lleno | Bundle insert fail |
+| Fueled travel fails | Specific reason · Ender pearls: 2/16 | Motivo concreto · Perlas de ender: 2/16 | Existing travel-failure sound |
+
+An empty portable uses the same hollow pot feedback; a full portable uses the
+bundle insertion-rejection sound. Neither case emits teleport-failure particles.
+
+Minecraft's [creator guidance on sound](https://learn.microsoft.com/en-us/minecraft/creator/documents/designinggameplayforvariousdevices#sound)
+says essential information must remain understandable without hearing the audio.
+This is Bedrock creator guidance, not a Java action-bar format specification.
+The exact counter wording above is our design choice applying that principle to
+the requested action bar. Mojang's [decorated-pot notes](https://feedback.minecraft.net/hc/en-us/articles/20298295897229-Minecraft-Java-Edition-Snapshot-23w41a)
+provide the no-GUI container precedent. The actual 26.2 DecoratedPotBlock uses
+DECORATED_POT_INSERT_FAIL for unsuccessful/empty-hand interaction; there is no
+separate sound event named decorated-pot-empty. BUNDLE_INSERT_FAIL is the
+separate vanilla full-container rejection selected here.
+
+![Actual full-station action-bar feedback](images/station-feedback.png)

@@ -1,7 +1,7 @@
 {
-  "parent": "minecraft:item/recovery_compass_11_in_hand",
+  "parent": "minecraft:item/compass_11_in_hand",
   "textures": {
-    "particle": "minecraft:item/recovery_compass_11",
+    "particle": "minecraft:item/compass_11",
     "gem": "minecraft:block/amethyst_block"
   },
   "elements": [

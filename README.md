@@ -30,9 +30,11 @@ The compass used in crafting determines the destination:
 
 A portable Teleporter holds **four Ender Pearls**. Hold the device and pearls in opposite hands, then sneak and right-click to insert one pearl. Both hand arrangements work. Select the device and hold it for **20 ticks (about one second)** until ready; right-click then teleports immediately. Readiness remains while held, damage does not reset it, and reselection restarts it. There is no cooldown after travel.
 
+Creative-menu teleporters also target the current world spawn, like an unbound compass. Existing devices with a missing destination are repaired, but a broken lodestone link is never redirected to spawn.
+
 A normal Teleporter only works within the destination's dimension. A **Dimensional Teleporter** can also travel between the Overworld, Nether, End and valid modded dimensions, using the same single pearl per attempt.
 
-Right-click either portable device on a lodestone to change its link without spending fuel or losing its manual name. Travel requires a **Calibrated Lodestone**. Linking to a normal lodestone succeeds, but the action bar explains that teleportation is unavailable. Recovery-crafted devices are named **Recovery Teleporter** and **Dimensional Recovery Teleporter**; their needles point to the player's last death. Relinking changes them to the corresponding lodestone-targeted device.
+Right-click either portable device on a lodestone to change its link without spending fuel or losing its manual name. Travel requires a **Calibrated Lodestone**. Linking to a normal lodestone succeeds, but the action bar explains that teleportation is unavailable. Recovery-crafted devices are named **Recovery Teleporter** and **Dimensional Recovery Teleporter**; they use exactly the same artwork and 3D model as the corresponding ordinary Teleporter, while their needles point to the player's last death. Relinking changes them to the corresponding lodestone-targeted device.
 
 The hotbar shade and crosshair indicator share the server's per-hand readiness state. Failure messages appear briefly in the action bar, not chat, and distinguish the reason (empty fuel, warming up, invalid or uncalibrated anchor, moving anchor, missing death, unavailable or wrong dimension, unsafe arrival, and passenger restrictions). [Full message list](docs/ACTION-BAR-MESSAGES.md).
 
@@ -90,7 +92,9 @@ The station permanently incorporates its device. A dimensional device produces a
 
 Stations have one inventory slot accepting up to **16 Ender Pearls**:
 
-- Right-click with a pearl to insert one.
+- Right-click with a pearl to insert one. The action bar shows the resulting stored count, such as **Ender pearls: 3/16**.
+- A full station rejects the pearl with a distinct sound and **Ender pearls: 16/16 · Full**. An empty station uses a hollow decorated-pot sound and **Ender pearls: 0/16 · Empty**.
+- Travel reports the remaining count; a failed journey keeps its specific reason alongside that count.
 - Right-click without a pearl to attempt travel immediately; stations need no arming.
 - Hoppers can insert and extract pearls. Other items are rejected.
 - Comparators use vanilla container fullness: empty is 0, one pearl is 1, eight are 8, and sixteen are 15.

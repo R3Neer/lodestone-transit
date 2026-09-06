@@ -51,8 +51,9 @@ calibrated blocks and returns a specific failure reason. `TravelMessage` owns
 localized action-bar feedback, including partial leash-group success.
 
 Item models reference vanilla's 32 compass frames and add small hand-authored
-inlays. `DeviceAppearance` selects recovery models without changing gameplay
-item IDs. The optional p1kl bridge references external geometry and checks
+inlays. `DeviceAppearance` normalizes existing recovery model overrides to the ordinary
+portable model. Recovery changes its automatic name and compass target, with the
+same appearance and gameplay item ID. The optional p1kl bridge references external geometry and checks
 resource presence to select a flat fallback. A model-property registry accessor
 is necessary because Minecraft exposes no public registration method there.
 
