@@ -118,6 +118,14 @@ No permanent chunk loader is installed. Successful arrivals use vanilla temporar
 
 See [verification and playtesting](docs/TESTING.md) for the exact tested versions and remaining human checks.
 
+## Develop in IntelliJ IDEA
+
+1. Install a **JDK 25** and select it as both the Project SDK and the Gradle JVM in IntelliJ IDEA.
+2. Choose **File → Open** and select this repository's `build.gradle` file (or its root directory), then import it as a Gradle project.
+3. Wait for the Gradle sync to finish. In the Gradle tool window, run **Tasks → fabric → runClient** to launch the development client.
+
+The client uses the project's generated `run/` directory for its instance and automatically loads the mod from the source set. Stop it, change the code, and start `runClient` again to test the next build. `runClientGameTest` starts the client GameTest environment; it is separate from normal manual playtesting.
+
 ## Build and tests
 
 With JDK 25 installed:
