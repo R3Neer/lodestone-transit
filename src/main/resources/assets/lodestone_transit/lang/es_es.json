@@ -1,0 +1,19 @@
+{
+  "item.lodestone_transit.teleporter": "Teletransportador",
+  "item.lodestone_transit.dimensional_teleporter": "Teletransportador dimensional",
+  "item.lodestone_transit.dimensional_core": "Núcleo dimensional",
+  "block.lodestone_transit.teleport_station": "Estación de teletransporte",
+  "block.lodestone_transit.dimensional_teleport_station": "Estación de teletransporte dimensional",
+  "transit.destination": "Destino: %s",
+  "transit.charges": "Perlas de ender: %s / %s",
+  "transit.dimensional": "Dimensional",
+  "transit.unavailable": "Estado: No disponible",
+  "transit.destination.unavailable": "No disponible",
+  "transit.destination.world_spawn": "Aparición del mundo",
+  "transit.destination.last_death": "Última muerte",
+  "transit.name.compass": "Brújula de %s",
+  "transit.name.teleporter": "Teletransportador de %s",
+  "transit.name.dimensional_teleporter": "Teletransportador dimensional de %s",
+  "transit.name.station": "Estación de teletransporte de %s",
+  "transit.name.dimensional_station": "Estación de teletransporte dimensional de %s"
+}

@@ -1,0 +1,19 @@
+{
+  "item.lodestone_transit.teleporter": "Teleporter",
+  "item.lodestone_transit.dimensional_teleporter": "Dimensional Teleporter",
+  "item.lodestone_transit.dimensional_core": "Dimensional Core",
+  "block.lodestone_transit.teleport_station": "Teleport Station",
+  "block.lodestone_transit.dimensional_teleport_station": "Dimensional Teleport Station",
+  "transit.destination": "Destination: %s",
+  "transit.charges": "Ender Pearls: %s / %s",
+  "transit.dimensional": "Dimensional",
+  "transit.unavailable": "Status: Unavailable",
+  "transit.destination.unavailable": "Unavailable",
+  "transit.destination.world_spawn": "World Spawn",
+  "transit.destination.last_death": "Last Death",
+  "transit.name.compass": "%s Compass",
+  "transit.name.teleporter": "%s Teleporter",
+  "transit.name.dimensional_teleporter": "%s Dimensional Teleporter",
+  "transit.name.station": "%s Teleport Station",
+  "transit.name.dimensional_station": "%s Dimensional Teleport Station"
+}

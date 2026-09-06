@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "lodestone_transit:teleport_station",
+    "lodestone_transit:dimensional_teleport_station"
+  ]
+}

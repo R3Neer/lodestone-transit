@@ -1,0 +1,16 @@
+{
+  "type": "lodestone_transit:transit",
+  "operation": "core",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:not",
+      "value": {
+        "condition": "fabric:registry_contains",
+        "registry": "minecraft:item",
+        "values": [
+          "alexsmobs:dimensional_carver"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "lodestone_transit:block/dimensional_teleport_station"
+    }
+  }
+}
