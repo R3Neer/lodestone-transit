@@ -18,6 +18,36 @@ import net.minecraft.world.phys.Vec3;
 import java.util.*;
 
 public final class TransitGameTests {
+    @GameTest(padding = 24) public void loadedRecipesWorkThroughCraftingTable(GameTestHelper h) {
+        var player = h.makeMockServerPlayerInLevel();
+        var menu = new net.minecraft.world.inventory.CraftingMenu(1, player.getInventory(),
+                net.minecraft.world.inventory.ContainerLevelAccess.create(h.getLevel(), h.absolutePos(BlockPos.ZERO)));
+        boolean alexsMobs = io.github.r3neer.lodestonetransit.compat.AlexsMobsCompat.available();
+        var catalyst = alexsMobs ? net.minecraft.core.registries.BuiltInRegistries.ITEM.getValue(
+                net.minecraft.resources.Identifier.fromNamespaceAndPath("alexsmobs", "dimensional_carver")) : LodestoneTransit.CORE;
+        var inputs = List.of(
+                grid(new ItemStack(Items.COMPASS), Items.ENDER_EYE, true),
+                grid(new ItemStack(Items.RECOVERY_COMPASS), Items.ENDER_EYE, true),
+                grid(new ItemStack(Items.NETHER_STAR), Items.ENDER_EYE, false),
+                grid(new ItemStack(LodestoneTransit.TELEPORTER), Items.CHISELED_STONE_BRICKS, false),
+                grid(new ItemStack(LodestoneTransit.DIMENSIONAL_TELEPORTER), Items.CHISELED_STONE_BRICKS, false),
+                CraftingInput.of(2, 1, List.of(new ItemStack(LodestoneTransit.TELEPORTER), new ItemStack(catalyst))),
+                grid(new ItemStack(Items.IRON_INGOT), Items.CHISELED_STONE_BRICKS, true));
+        var expected = List.of(LodestoneTransit.TELEPORTER, LodestoneTransit.TELEPORTER, LodestoneTransit.CORE,
+                LodestoneTransit.STATION.asItem(), LodestoneTransit.DIMENSIONAL_STATION.asItem(), LodestoneTransit.DIMENSIONAL_TELEPORTER, Items.LODESTONE);
+        for (int n = 0; n < inputs.size(); n++) {
+            if (n == 2 && alexsMobs) continue; // The fallback core recipe is deliberately disabled.
+            var input = inputs.get(n);
+            for (var slot : menu.getInputGridSlots()) slot.set(ItemStack.EMPTY);
+            for (int y = 0; y < input.height(); y++) for (int x = 0; x < input.width(); x++)
+                menu.getInputGridSlots().get(y * 3 + x).set(input.getItem(x, y).copy());
+            check(menu.getResultSlot().getItem().is(expected.get(n)), "loaded crafting-table recipe " + n);
+            var taken = menu.quickMoveStack(player, 0);
+            check(taken.is(expected.get(n)), "crafting-table output can be taken " + n);
+            check(menu.getResultSlot().getItem().isEmpty(), "ingredients consumed " + n);
+        }
+        h.succeed();
+    }
     private static void check(boolean condition, String message) { if (!condition) throw new net.minecraft.gametest.framework.GameTestAssertException(Component.literal(message),0); }
     private static CraftingInput grid(ItemStack center, Item outer, boolean amethyst) {
         var list = new ArrayList<ItemStack>(); for (int i = 0; i < 9; i++) list.add(i == 4 ? center : new ItemStack(amethyst && i == 1 ? Items.AMETHYST_SHARD : outer));
