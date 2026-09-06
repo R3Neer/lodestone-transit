@@ -3,10 +3,13 @@
   "id": "lodestone_transit",
   "version": "${version}",
   "name": "Lodestone Transit",
+  "icon": "assets/lodestone_transit/textures/item/teleporter.png",
   "description": "Fast travel built from Minecraft's own navigation systems.",
   "authors": ["R3Neer"],
   "contact": {"sources": "https://github.com/r3neer/lodestone-transit"},
   "license": "GPL-3.0-only",
   "environment": "*",
+  "entrypoints": {"main": ["io.github.r3neer.lodestonetransit.LodestoneTransit"], "client": ["io.github.r3neer.lodestonetransit.LodestoneTransitClient"]},
+  "mixins": ["lodestone_transit.mixins.json"],
   "depends": {"fabricloader": ">=0.19.5", "minecraft": "~26.2", "java": ">=25", "fabric-api": "*"}
 }
