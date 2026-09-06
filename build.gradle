@@ -1,6 +1,9 @@
 plugins { id 'net.fabricmc.fabric-loom' version "${loom_version}" }
 
 repositories { mavenCentral() }
+if (providers.gradleProperty('compatModsDir').isPresent()) {
+    dependencies { runtimeOnly fileTree(dir: providers.gradleProperty('compatModsDir').get(), include: '*.jar') }
+}
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
     implementation "net.fabricmc:fabric-loader:${loader_version}"
@@ -16,4 +19,12 @@ processResources {
 java { withSourcesJar(); sourceCompatibility = JavaVersion.VERSION_25; targetCompatibility = JavaVersion.VERSION_25 }
 tasks.withType(JavaCompile).configureEach { options.release = 25 }
 test { useJUnitPlatform() }
+fabricApi {
+    configureTests {
+        createSourceSet = true
+        modId = 'lodestone_transit_test'
+        enableGameTests = true
+        enableClientGameTests = true
+    }
+}
 jar { from('LICENSE') { rename { "${it}_lodestone-transit" } } }

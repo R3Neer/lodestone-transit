@@ -16,7 +16,7 @@ public final class EquipReadiness {
     public static void reselect(ServerPlayer player) { var hands = HELD.get(player.getUUID()); if (hands != null) hands.remove(InteractionHand.MAIN_HAND); }
     public static void forget(ServerPlayer player) { reset(player); ATTEMPTS.remove(player.getUUID()); }
     public static void tick(ServerPlayer player) {
-        long now = player.level().getGameTime();
+        long now = player.level().getServer().getTickCount();
         var hands = HELD.computeIfAbsent(player.getUUID(), id -> new EnumMap<>(InteractionHand.class));
         for (var hand : InteractionHand.values()) {
             var stack = player.getItemInHand(hand);
@@ -35,10 +35,10 @@ public final class EquipReadiness {
     }
     public static boolean ready(ServerPlayer player, InteractionHand hand) {
         tick(player); var hands = HELD.get(player.getUUID()); var held = hands == null ? null : hands.get(hand);
-        return held != null && player.level().getGameTime() - held.since >= 20;
+        return held != null && player.level().getServer().getTickCount() - held.since >= 20;
     }
     public static boolean claimAttempt(ServerPlayer player) {
-        long tick = player.level().getGameTime();
+        long tick = player.level().getServer().getTickCount();
         return !Objects.equals(ATTEMPTS.put(player.getUUID(), tick), tick);
     }
 }
