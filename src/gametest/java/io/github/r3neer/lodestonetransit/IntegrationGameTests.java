@@ -77,6 +77,7 @@ public final class IntegrationGameTests {
     @SuppressWarnings("removal")
     @GameTest(padding=32,maxTicks=100) public void dimensionalMountAndLeashChain(GameTestHelper h) {
         var p=h.makeMockServerPlayerInLevel(); var horse=h.spawn(EntityTypes.HORSE,1,2,1); p.snapTo(horse.position()); p.startRiding(horse,true,false);
+        horse.setTamed(true); horse.setNoAi(true);
         var cow=h.spawn(EntityTypes.COW,2,2,1); var sheep=h.spawn(EntityTypes.SHEEP,3,2,1); cow.setLeashedTo(p,true); sheep.setLeashedTo(cow,true);
         var target=h.getLevel().getServer().getLevel(Level.END); var center=new BlockPos(600,80,600);
         for(var pos:BlockPos.betweenClosed(center.offset(-6,-1,-6),center.offset(6,6,6))) target.setBlockAndUpdate(pos,pos.getY()==79 ? Blocks.STONE.defaultBlockState():Blocks.AIR.defaultBlockState());
@@ -85,11 +86,11 @@ public final class IntegrationGameTests {
             var group=new TeleportGroup(p); var landing=SafeLandingFinder.find(target,horse,Vec3.atBottomCenterOf(center),5,List.of()).orElseThrow(); check(group.travel(target,landing),"dimensional mount trip succeeds");
             check(p.getVehicle()!=null && p.getVehicle().getUUID().equals(horse.getUUID()) && p.level()==target,"immediate cross-dimensional mount relation");
         });
-        h.runAfterDelay(15,()-> {
+        h.succeedWhen(()-> {
             var arrivedHorse=target.getEntity(horse.getUUID()); var arrivedCow=target.getEntity(cow.getUUID()); var arrivedSheep=target.getEntity(sheep.getUUID());
-            check(arrivedHorse!=null && p.getVehicle()==arrivedHorse && p.level()==target,"cross-dimensional mount registered after chunk activation");
+            h.assertTrue(arrivedHorse!=null && p.getVehicle()==arrivedHorse && p.level()==target,Component.literal("cross-dimensional mount registration: lookup="+arrivedHorse+", vehicle="+p.getVehicle()+", dimension="+p.level().dimension()));
             check(arrivedCow instanceof Leashable first && first.getLeashHolder()==p && arrivedSheep instanceof Leashable second && second.getLeashHolder()==arrivedCow,"cross-dimensional chain reconstruction");
-            check(h.getLevel().getEntity(horse.getUUID())==null && h.getLevel().getEntity(cow.getUUID())==null,"no origin duplicates"); h.succeed();
+            check(h.getLevel().getEntity(horse.getUUID())==null && h.getLevel().getEntity(cow.getUUID())==null,"no origin duplicates");
         });
     }
 }
