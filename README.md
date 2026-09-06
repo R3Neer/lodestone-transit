@@ -4,7 +4,7 @@
 
 Fast travel built from Minecraft's own navigation systems: compasses define destinations, lodestones anchor them, and ender pearls power the journey.
 
-A Fabric mod for **Minecraft 26.2**, requiring **Fabric API**, **Fabric Loader 0.19.5+** and **Java 25**. Install the mod on both the client and server. Version **0.1.0-beta.1** is a beta under active human playtesting.
+A Fabric mod for **Minecraft 26.2**, requiring **Fabric API**, **Fabric Loader 0.19.5+** and **Java 25**. Install the mod on both the client and server. Version **0.1.0-beta.2** is a beta under active human playtesting.
 
 There are no waypoint menus, destination lists, energy networks or teleport commands. Make a device from a compass, carry pearls, and keep its physical anchor intact.
 
@@ -134,7 +134,7 @@ The hand-painted 16 × 16 inventory sprites: normal teleporters in the upper row
 
 ## Optional compatibility
 
-- **p1kl's 3D Items:** enable the included **Lodestone Transit: p1kl’s 3D Items** resource pack above p1kl's external pack. The original teleporter models match its compass's 9 × 9 × 2 body dimensions, with a moving amethyst pointer and four curved charge fragments. Inventory icons retain their round, 16 × 16 pixel silhouette. No external textures or models are bundled. If p1kl is disabled, the bridge selects the regular flat models. The vp26 version is `GaCryZnJ`.
+- **p1kl's 3D Items:** the included **Lodestone Transit: p1kl’s 3D Items** bridge is always enabled and automatically uses the external p1kl pack when it is present. The original teleporter models match its compass's 9 × 9 × 2 body dimensions, with a moving amethyst pointer and four curved charge fragments. Inventory icons retain their round, 16 × 16 pixel silhouette. No external textures or models are bundled. If p1kl is disabled, the bridge selects the regular flat models. The vp26 version is `GaCryZnJ`.
 
 - **Pushier Pistons 1.0-mc26.2 / FrozenLib 2.5.3-mc26.2:** stations opt into FrozenLib's `has_pushable_block_entity` tag so its normal movement preserves their data and inventory.
 - **Alex's Mobs Continued:** registry-based Dimensional Carver integration; no hard dependency or copied code/assets.
@@ -142,7 +142,7 @@ The hand-painted 16 × 16 inventory sprites: normal teleporters in the upper row
 - **Ender Pearl damage mods:** damage uses the vanilla `enderPearl()` source and 5-point amount. General damage-source hooks apply; a mod that injects only into the thrown projectile's private impact method will not automatically affect this device.
 - **Combat mods:** readiness uses an independent server timer and slot-change observation, not the attack-strength timer. An optional mod that overwrites the same packet or piston internals may still require an integration update.
 
-With p1kl's 3D Items and the included compatibility pack enabled, the normal Teleporter has an iron frame:
+With p1kl's 3D Items installed, the normal Teleporter has an iron frame:
 
 ![Normal Teleporter held in first person with the optional 3D resource packs enabled](docs/images/teleporter-3d.png)
 
@@ -169,7 +169,7 @@ With JDK 25 installed:
 ./gradlew runClientGameTest
 ```
 
-On Windows, use `gradlew.bat`. `build` includes unit tests and dedicated-server GameTests. The distributable is `build/libs/lodestone-transit-0.1.0-beta.1.jar`; the sources JAR is separate. CI runs the server-side build and tests on Java 25.
+On Windows, use `gradlew.bat`. `build` includes unit tests and dedicated-server GameTests. The distributable is `build/libs/lodestone-transit-0.1.0-beta.2.jar`; the sources JAR is separate. CI runs the server-side build and tests on Java 25.
 
 To run the same integration suite with locally installed optional mod JARs and their dependencies:
 

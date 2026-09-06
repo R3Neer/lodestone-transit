@@ -158,6 +158,9 @@ public final class TransitClientGameTest implements FabricClientGameTest {
                 selected.set(List.copyOf(repository.getSelectedIds()));
                 packIds.set(repository.getAvailableIds().stream().filter(id -> id.contains("p1kl")).toList());
             });
+            if (packIds.get().stream().noneMatch(id -> !id.startsWith("file/") && selected.get().contains(id))) {
+                throw new AssertionError("Built-in p1kl compatibility pack is not enabled automatically");
+            }
             if (packIds.get().stream().anyMatch(id -> id.startsWith("file/"))) {
                 context.runOnClient(client -> {
                     var ids = new ArrayList<>(selected.get());

@@ -84,7 +84,7 @@ features for a future Gradle 10 migration; this project pins Gradle 9.5.1.
 ## Human playtest checklist
 
 The first human playtest reported recipe and readiness defects and requested the
-visual redesign. The version is **0.1.0-beta.1** while the revised experience is
+visual redesign. The version is **0.1.0-beta.2** while the revised experience is
 being evaluated. In particular, test the feel of readiness, feedback and failure costs,
 survival crafting/anvil workflows, recovery after death, ordinary multiplayer
 latency, server restarts and chunk unloading, long and cyclic animal chains,
@@ -156,3 +156,9 @@ acceptance is recorded.
 The same production JAR additionally passed all 30 server GameTests with
 Pushier Pistons 1.0, FrozenLib 2.5.3, Alex's Mobs Continued 2.1.9 and CodxLib 1.5.1
 (the installed Fabric 26.2 JARs). This does not constitute a full modpack playtest.
+
+For 0.1.0-beta.2, the full build and client GameTest passed with the exact p1kl
+ZIP installed by VanillaPlus-26.2. The initial resource reload included
+`lodestone_transit:p1kl_compat` without the test selecting it, which verifies
+that the built-in bridge is enabled automatically. The test then enabled and
+removed the external p1kl pack and verified 3D detection and 2D fallback.

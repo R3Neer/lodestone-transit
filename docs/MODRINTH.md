@@ -13,7 +13,7 @@ before attempting public publication. This document is not a publish command.
 - License: GPL-3.0-only
 - Source: https://github.com/r3neer/lodestone-transit
 - Issues: https://github.com/r3neer/lodestone-transit/issues
-- Version: 0.1.0-beta.1; channel: beta
+- Version: 0.1.0-beta.2; channel: beta
 - Loader: Fabric; Minecraft: 26.2 only
 - Environment: required on client and server
 - Required version dependency: Fabric API (compatible 26.2 version >= 0.159.0+26.2)
@@ -21,7 +21,7 @@ before attempting public publication. This document is not a publish command.
   Alex's Mobs Continued. Do not mark these required.
 - Content disclosures: AI-generated code, assets and text. The mod itself does
   not call AI services at runtime.
-- Primary upload: lodestone-transit-0.1.0-beta.1.jar
+- Primary upload: lodestone-transit-0.1.0-beta.2.jar
 - Optional additional file: matching sources JAR
 - Icon and gallery: pending moderation clarification; no concept-art uploads.
 

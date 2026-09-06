@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.0-beta.2
+
+- The built-in p1kl's 3D Items bridge is now always enabled. Installing the
+  external p1kl resource pack is sufficient; players no longer need to discover
+  and enable a second hidden compatibility pack manually.
+
 ## 0.1.0-beta.1
 
 First tagged beta for Minecraft 26.2, Fabric Loader 0.19.5+, Fabric API
