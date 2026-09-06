@@ -17,6 +17,8 @@ public class CompassAngleMixin {
     @WrapOperation(method = "calculate", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/item/properties/numeric/CompassAngleState$CompassTarget;get(Lnet/minecraft/client/multiplayer/ClientLevel;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/ItemOwner;)Lnet/minecraft/core/GlobalPos;"))
     private GlobalPos transit$target(CompassAngleState.CompassTarget type, ClientLevel level, ItemStack stack, ItemOwner owner, Operation<GlobalPos> original) {
         var d = stack.get(LodestoneTransit.DESTINATION);
+        if (d != null && d.kind() == io.github.r3neer.lodestonetransit.teleport.TeleportDestination.Kind.LAST_DEATH) return CompassAngleState.CompassTarget.RECOVERY.get(level, stack, owner);
+        if (d != null && d.kind() == io.github.r3neer.lodestonetransit.teleport.TeleportDestination.Kind.WORLD_SPAWN) return CompassAngleState.CompassTarget.SPAWN.get(level, stack, owner);
         if (d != null && d.anchorId().isPresent()) {
             var a = DestinationNaming.CLIENT_ANCHORS.get(d.anchorId().get());
             return a != null && a.valid() ? a.position() : null;

@@ -28,3 +28,17 @@ fabricApi {
     }
 }
 jar { from('LICENSE') { rename { "${it}_lodestone-transit" } } }
+
+// Optional, locally supplied upstream pack; no third-party artwork is redistributed.
+if (providers.gradleProperty('p1klResourcePack').isPresent()) {
+    tasks.named('runClientGameTest') {
+        doFirst {
+            def sourcePack = file(providers.gradleProperty('p1klResourcePack').get())
+            if (!sourcePack.isFile()) throw new GradleException("Missing p1kl resource pack: $sourcePack")
+            copy {
+                from sourcePack
+                into file(loom.runs.getByName('clientGameTest').runDir + '/resourcepacks')
+            }
+        }
+    }
+}

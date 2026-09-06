@@ -18,6 +18,49 @@ import net.minecraft.world.phys.Vec3;
 import java.util.*;
 
 public final class TransitGameTests {
+    @GameTest(padding = 24) public void calibratedAndOrdinaryLinkingHaveDifferentTravelPermissions(GameTestHelper h) {
+        var player = h.makeMockServerPlayerInLevel();
+        var ordinary = h.absolutePos(new BlockPos(1, 1, 1));
+        var calibrated = ordinary.east(3);
+        h.getLevel().setBlockAndUpdate(ordinary, Blocks.LODESTONE.defaultBlockState());
+        h.getLevel().setBlockAndUpdate(calibrated, LodestoneTransit.CALIBRATED_LODESTONE.defaultBlockState());
+        for (var item : List.of(LodestoneTransit.TELEPORTER, LodestoneTransit.DIMENSIONAL_TELEPORTER)) {
+            for (var hand : net.minecraft.world.InteractionHand.values()) {
+                var stack = new ItemStack(item);
+                stack.set(LodestoneTransit.DESTINATION, TeleportDestination.death());
+                stack.set(LodestoneTransit.CHARGES, 3);
+                stack.set(DataComponents.CUSTOM_NAME, Component.literal("My device"));
+                player.setItemInHand(hand, stack);
+                for (var pos : List.of(ordinary, calibrated)) {
+                    var result = net.fabricmc.fabric.api.event.player.UseBlockCallback.EVENT.invoker().interact(player, h.getLevel(), hand,
+                        new net.minecraft.world.phys.BlockHitResult(Vec3.atCenterOf(pos), Direction.UP, pos, false));
+                    check(result.consumesAction(), "linking consumes interaction instead of triggering travel");
+                    check(stack.get(LodestoneTransit.CHARGES) == 3, "linking preserves fuel");
+                    check(stack.getHoverName().getString().equals("My device"), "linking preserves manual name");
+                    var resolved = TeleportResolver.resolveDetailed(player, stack.get(LodestoneTransit.DESTINATION));
+                    check(pos.equals(ordinary) ? resolved.failure() == TravelMessage.UNCALIBRATED : resolved.target().pos().equals(calibrated), "normal links cannot travel; calibrated links can");
+                    check(stack.get(DataComponents.ITEM_MODEL).equals(net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(item)), "recovery art resets on relink");
+                }
+            }
+        }
+        check(TeleportResolver.resolveDetailed(player, null).failure() == TravelMessage.NO_DESTINATION, "missing target has its own reason");
+        player.setLastDeathLocation(Optional.empty());
+        check(TeleportResolver.resolveDetailed(player, TeleportDestination.death()).failure() == TravelMessage.NO_DEATH, "missing death has its own reason");
+        check(TeleportResolver.resolveDetailed(player, TeleportDestination.anchor(UUID.randomUUID())).failure() == TravelMessage.ANCHOR_UNAVAILABLE, "unknown identity has its own reason");
+        h.getLevel().setBlockAndUpdate(calibrated, Blocks.AIR.defaultBlockState());
+        check(TeleportResolver.resolveDetailed(player, player.getMainHandItem().get(LodestoneTransit.DESTINATION)).failure() == TravelMessage.ANCHOR_UNAVAILABLE, "calibrated destruction invalidates link");
+        h.succeed();
+    }
+    @GameTest(padding = 24) public void recipeBookMetadataAndRecoveryNames(GameTestHelper h) {
+        for (var operation : List.of("teleporter", "recovery", "station", "dimensional_station", "upgrade", "core")) {
+            var recipe = new TransitRecipe(operation);
+            check(!recipe.isSpecial() && !recipe.placementInfo().isImpossibleToPlace() && !recipe.display().isEmpty(), "recipe is discoverable and placeable: " + operation);
+        }
+        var recovery = new TransitRecipe("recovery").assemble(grid(new ItemStack(Items.RECOVERY_COMPASS), Items.ENDER_EYE, true));
+        check(recovery.getHoverName().getString().equals("Recovery Teleporter"), "dedicated recovery name");
+        check(recovery.get(DataComponents.ITEM_MODEL).equals(LodestoneTransit.id("recovery_teleporter")), "recovery needle model");
+        h.succeed();
+    }
     @GameTest(padding = 24) public void loadedRecipesWorkThroughCraftingTable(GameTestHelper h) {
         var player = h.makeMockServerPlayerInLevel();
         var menu = new net.minecraft.world.inventory.CraftingMenu(1, player.getInventory(),
@@ -34,7 +77,7 @@ public final class TransitGameTests {
                 CraftingInput.of(2, 1, List.of(new ItemStack(LodestoneTransit.TELEPORTER), new ItemStack(catalyst))),
                 grid(new ItemStack(Items.IRON_INGOT), Items.CHISELED_STONE_BRICKS, true));
         var expected = List.of(LodestoneTransit.TELEPORTER, LodestoneTransit.TELEPORTER, LodestoneTransit.CORE,
-                LodestoneTransit.STATION.asItem(), LodestoneTransit.DIMENSIONAL_STATION.asItem(), LodestoneTransit.DIMENSIONAL_TELEPORTER, Items.LODESTONE);
+                LodestoneTransit.STATION.asItem(), LodestoneTransit.DIMENSIONAL_STATION.asItem(), LodestoneTransit.DIMENSIONAL_TELEPORTER, LodestoneTransit.CALIBRATED_LODESTONE.asItem());
         for (int n = 0; n < inputs.size(); n++) {
             if (n == 2 && alexsMobs) continue; // The fallback core recipe is deliberately disabled.
             var input = inputs.get(n);

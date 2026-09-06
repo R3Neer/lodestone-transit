@@ -1,0 +1,9 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:single",
+      "resource": "minecraft:item/compass_16",
+      "sprite": "lodestone_transit:block/station_dial"
+    }
+  ]
+}

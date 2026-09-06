@@ -26,8 +26,9 @@ permanent loader is created. Successful arrival uses vanilla PORTAL tickets,
 which expire after 300 ticks, to permit target entity sections to activate.
 
 `item` owns a server equip timer independent of attack strength. Holding readiness
-is shown through vanilla item cooldown packets; successful activation does not
-start a cooldown. Slot-selection packets reset readiness, including reselection
+is synchronized as per-hand remaining ticks; both HUD indicators read the same
+snapshot. Display-only mixins preserve vanilla attack strength and do not block
+use packets, allowing explanatory action-bar feedback while warming up. Slot-selection packets reset readiness, including reselection
 of the same slot. Inventory click packets also observe immediate stack changes.
 One server tick can claim at most one activation/loading interaction per player.
 
@@ -40,6 +41,20 @@ delegates to `AbstractContainerMenu` with a maximum stack size of 16.
 `recipe` uses custom 26.2 serializers, component-preserving transmutation and
 explicit catalyst remainders. The optional Carver is resolved solely by registry
 ID. A Fabric registry resource condition hides the Core recipe when it is present.
+Recipes provide placement ingredients and shaped/shapeless displays. Recovery and
+dimensional stations have separate recipe IDs and previews; hidden recipe
+advancements provide ordinary ingredient-based discovery.
+
+`AnchorBlocks` centralizes ordinary/calibrated anchor recognition. Both can be
+linked and named, but `TeleportResolver.resolveDetailed` permits travel only to
+calibrated blocks and returns a specific failure reason. `TravelMessage` owns
+localized action-bar feedback, including partial leash-group success.
+
+Item models reference vanilla's 32 compass frames and add small hand-authored
+inlays. `DeviceAppearance` selects recovery models without changing gameplay
+item IDs. The optional p1kl bridge references external geometry and checks
+resource presence to select a flat fallback. A model-property registry accessor
+is necessary because Minecraft exposes no public registration method there.
 
 ## Mixin boundaries
 

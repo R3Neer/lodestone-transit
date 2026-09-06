@@ -29,7 +29,7 @@ public final class AnchorRegistry extends SavedData {
     public LodestoneAnchor get(UUID id) { return anchors.get(id); }
     public LodestoneAnchor at(GlobalPos pos) { return anchors.get(positions.get(pos)); }
     public LodestoneAnchor adopt(ServerLevel level, BlockPos pos) {
-        if (!level.getBlockState(pos).is(Blocks.LODESTONE)) return null;
+        if (!AnchorBlocks.isAnchor(level.getBlockState(pos))) return null;
         var global = GlobalPos.of(level.dimension(), pos.immutable());
         var existing = at(global); if (existing != null) return existing;
         var anchor = new LodestoneAnchor(UUID.randomUUID(), global, Optional.empty(), true);

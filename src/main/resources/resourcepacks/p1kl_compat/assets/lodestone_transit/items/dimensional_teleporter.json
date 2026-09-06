@@ -1,0 +1,1376 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "lodestone_transit:p1kl_available",
+    "on_true": {
+      "type": "minecraft:range_dispatch",
+      "property": "minecraft:compass",
+      "target": "spawn",
+      "scale": 32,
+      "entries": [
+        {
+          "threshold": 0,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_16"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_16_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_16_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 0.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_17"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_17_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_17_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 1.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_18"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_18_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_18_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 2.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_19"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_19_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_19_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 3.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_20"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_20_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_20_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 4.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_21"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_21_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_21_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 5.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_22"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_22_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_22_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 6.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_23"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_23_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_23_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 7.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_24"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_24_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_24_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 8.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_25"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_25_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_25_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 9.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_26"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_26_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_26_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 10.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_27"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_27_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_27_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 11.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_28"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_28_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_28_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 12.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_29"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_29_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_29_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 13.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_30"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_30_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_30_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 14.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_31"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_31_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_31_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 15.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_00"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_00_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_00_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 16.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_01"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_01_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_01_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 17.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_02"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_02_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_02_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 18.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_03"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_03_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_03_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 19.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_04"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_04_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_04_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 20.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_05"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_05_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_05_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 21.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_06"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_06_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_06_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 22.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_07"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_07_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_07_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 23.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_08"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_08_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_08_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 24.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_09"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_09_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_09_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 25.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_10"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_10_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_10_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 26.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_11"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_11_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_11_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 27.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_12"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_12_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_12_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 28.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_13"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_13_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_13_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 29.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_14"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_14_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_14_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 30.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_15"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_15_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_15_inlay"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "threshold": 31.5,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "on_shelf",
+                  "fixed"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_16"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:composite",
+              "models": [
+                {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_16_in_hand"
+                },
+                {
+                  "type": "minecraft:model",
+                  "model": "lodestone_transit:item/dimensional_teleporter_16_inlay"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:select",
+        "property": "minecraft:display_context",
+        "cases": [
+          {
+            "when": [
+              "gui",
+              "on_shelf",
+              "fixed"
+            ],
+            "model": {
+              "type": "minecraft:model",
+              "model": "lodestone_transit:item/dimensional_teleporter_16"
+            }
+          }
+        ],
+        "fallback": {
+          "type": "minecraft:composite",
+          "models": [
+            {
+              "type": "minecraft:model",
+              "model": "minecraft:item/compass_16_in_hand"
+            },
+            {
+              "type": "minecraft:model",
+              "model": "lodestone_transit:item/dimensional_teleporter_16_inlay"
+            }
+          ]
+        }
+      }
+    },
+    "on_false": {
+      "type": "minecraft:range_dispatch",
+      "property": "minecraft:compass",
+      "target": "spawn",
+      "scale": 32,
+      "entries": [
+        {
+          "threshold": 0,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_16"
+          }
+        },
+        {
+          "threshold": 0.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_17"
+          }
+        },
+        {
+          "threshold": 1.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_18"
+          }
+        },
+        {
+          "threshold": 2.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_19"
+          }
+        },
+        {
+          "threshold": 3.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_20"
+          }
+        },
+        {
+          "threshold": 4.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_21"
+          }
+        },
+        {
+          "threshold": 5.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_22"
+          }
+        },
+        {
+          "threshold": 6.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_23"
+          }
+        },
+        {
+          "threshold": 7.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_24"
+          }
+        },
+        {
+          "threshold": 8.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_25"
+          }
+        },
+        {
+          "threshold": 9.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_26"
+          }
+        },
+        {
+          "threshold": 10.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_27"
+          }
+        },
+        {
+          "threshold": 11.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_28"
+          }
+        },
+        {
+          "threshold": 12.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_29"
+          }
+        },
+        {
+          "threshold": 13.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_30"
+          }
+        },
+        {
+          "threshold": 14.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_31"
+          }
+        },
+        {
+          "threshold": 15.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_00"
+          }
+        },
+        {
+          "threshold": 16.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_01"
+          }
+        },
+        {
+          "threshold": 17.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_02"
+          }
+        },
+        {
+          "threshold": 18.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_03"
+          }
+        },
+        {
+          "threshold": 19.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_04"
+          }
+        },
+        {
+          "threshold": 20.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_05"
+          }
+        },
+        {
+          "threshold": 21.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_06"
+          }
+        },
+        {
+          "threshold": 22.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_07"
+          }
+        },
+        {
+          "threshold": 23.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_08"
+          }
+        },
+        {
+          "threshold": 24.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_09"
+          }
+        },
+        {
+          "threshold": 25.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_10"
+          }
+        },
+        {
+          "threshold": 26.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_11"
+          }
+        },
+        {
+          "threshold": 27.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_12"
+          }
+        },
+        {
+          "threshold": 28.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_13"
+          }
+        },
+        {
+          "threshold": 29.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_14"
+          }
+        },
+        {
+          "threshold": 30.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_15"
+          }
+        },
+        {
+          "threshold": 31.5,
+          "model": {
+            "type": "minecraft:model",
+            "model": "lodestone_transit:item/dimensional_teleporter_16"
+          }
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:model",
+        "model": "lodestone_transit:item/dimensional_teleporter_16"
+      }
+    }
+  }
+}

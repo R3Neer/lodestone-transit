@@ -35,28 +35,41 @@ public final class LodestoneTransit implements ModInitializer {
     public static final Item TELEPORTER = Registry.register(BuiltInRegistries.ITEM, id("teleporter"), new TeleporterItem(itemProperties("teleporter").component(CHARGES, 0), false));
     public static final Item DIMENSIONAL_TELEPORTER = Registry.register(BuiltInRegistries.ITEM, id("dimensional_teleporter"), new TeleporterItem(itemProperties("dimensional_teleporter").component(CHARGES, 0), true));
     public static final Item CORE = Registry.register(BuiltInRegistries.ITEM, id("dimensional_core"), new Item(itemProperties("dimensional_core").durability(20)));
+    public static final Block CALIBRATED_LODESTONE = Registry.register(BuiltInRegistries.BLOCK, id("calibrated_lodestone"), new CalibratedLodestoneBlock(blockProperties("calibrated_lodestone")));
     public static final TeleportStationBlock STATION = Registry.register(BuiltInRegistries.BLOCK, id("teleport_station"), new TeleportStationBlock(blockProperties("teleport_station"), false));
     public static final TeleportStationBlock DIMENSIONAL_STATION = Registry.register(BuiltInRegistries.BLOCK, id("dimensional_teleport_station"), new TeleportStationBlock(blockProperties("dimensional_teleport_station"), true));
     public static final BlockEntityType<TeleportStationBlockEntity> STATION_ENTITY = Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, id("station"), FabricBlockEntityTypeBuilder.create(TeleportStationBlockEntity::new, STATION, DIMENSIONAL_STATION).build());
     @Override public void onInitialize() {
+        Registry.register(BuiltInRegistries.ITEM, id("calibrated_lodestone"), new BlockItem(CALIBRATED_LODESTONE, itemProperties("calibrated_lodestone").stacksTo(64).useBlockDescriptionPrefix()));
         Registry.register(BuiltInRegistries.ITEM, id("teleport_station"), new StationItem(STATION, itemProperties("teleport_station").useBlockDescriptionPrefix(), false));
         Registry.register(BuiltInRegistries.ITEM, id("dimensional_teleport_station"), new StationItem(DIMENSIONAL_STATION, itemProperties("dimensional_teleport_station").useBlockDescriptionPrefix(), true));
         Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, id("transit"), TransitRecipe.SERIALIZER);
         AnchorNetworking.register();
+        ReadinessNetworking.register();
         ServerTickEvents.END_SERVER_TICK.register(server -> server.getPlayerList().getPlayers().forEach(EquipReadiness::tick));
         ServerLifecycleEvents.SERVER_STOPPED.register(server -> EquipReadiness.clear());
         net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> EquipReadiness.forget(handler.player));
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(entries -> { entries.accept(TELEPORTER); entries.accept(DIMENSIONAL_TELEPORTER); if (!AlexsMobsCompat.available()) entries.accept(CORE); });
-        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(entries -> { entries.accept(STATION); entries.accept(DIMENSIONAL_STATION); });
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(entries -> { entries.accept(CALIBRATED_LODESTONE); entries.accept(STATION); entries.accept(DIMENSIONAL_STATION); });
         UseBlockCallback.EVENT.register((player, world, hand, hit) -> {
-            if (!world.getBlockState(hit.getBlockPos()).is(Blocks.LODESTONE) || player.isSpectator()) return InteractionResult.PASS;
+            if (!AnchorBlocks.isAnchor(world.getBlockState(hit.getBlockPos())) || player.isSpectator()) return InteractionResult.PASS;
             var stack = player.getItemInHand(hand);
             boolean naming = stack.is(Items.NAME_TAG) && stack.has(DataComponents.CUSTOM_NAME);
-            if (!naming && !stack.is(Items.COMPASS)) return InteractionResult.PASS;
+            boolean device = stack.getItem() instanceof TeleporterItem;
+            if (!naming && !stack.is(Items.COMPASS) && !device) return InteractionResult.PASS;
             if (world instanceof ServerLevel level) {
                 var registry = AnchorRegistry.get(level.getServer()); var anchor = registry.adopt(level, hit.getBlockPos());
-                if (anchor == null) return InteractionResult.FAIL;
+                if (anchor == null) { io.github.r3neer.lodestonetransit.teleport.TravelMessage.ANCHOR_UNAVAILABLE.fail((ServerPlayer) player); return InteractionResult.SUCCESS; }
                 if (naming) { registry.rename(anchor, stack.get(DataComponents.CUSTOM_NAME)); stack.consume(1, player); }
+                else if (device) {
+                    // Mutate the destination only; fuel, manual name and readiness remain intact.
+                    stack.set(DESTINATION, TeleportDestination.anchor(anchor.id()));
+                    DeviceAppearance.update(stack);
+                    stack.set(DataComponents.LODESTONE_TRACKER, new LodestoneTracker(Optional.of(anchor.position()), false));
+                    (AnchorBlocks.calibrated(world.getBlockState(hit.getBlockPos()))
+                        ? io.github.r3neer.lodestonetransit.teleport.TravelMessage.LINKED_CALIBRATED
+                        : io.github.r3neer.lodestonetransit.teleport.TravelMessage.LINKED_UNCALIBRATED).show((ServerPlayer) player);
+                }
                 else {
                     var linked = stack.copyWithCount(1);
                     linked.set(DESTINATION, TeleportDestination.anchor(anchor.id())); linked.set(DataComponents.LODESTONE_TRACKER, new LodestoneTracker(Optional.of(anchor.position()), false));

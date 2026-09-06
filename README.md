@@ -4,14 +4,16 @@
 
 Fast travel built from Minecraft's own navigation systems: compasses define destinations, lodestones anchor them, and ender pearls power the journey.
 
-A Fabric mod for **Minecraft 26.2**, requiring **Fabric API**, **Fabric Loader 0.19.5+** and **Java 25**. Install the mod on both the client and server. Version **0.1.0** is an initial implementation awaiting human playtesting.
+A Fabric mod for **Minecraft 26.2**, requiring **Fabric API**, **Fabric Loader 0.19.5+** and **Java 25**. Install the mod on both the client and server. Version **0.1.0** is under active human playtesting.
 
 There are no waypoint menus, destination lists, energy networks or teleport commands. Make a device from a compass, carry pearls, and keep its physical anchor intact.
+
+![Calibrated lodestone between both teleport stations](docs/images/calibrated-lodestone-and-stations.png)
 
 ## Highlights
 
 - Guides a compass-bound player to spawn, a named lodestone, or their last death position.
-- Supports portable travel and lodestone stations with configurable storage.
+- Supports four-pearl portable devices and sixteen-pearl teleport stations.
 - Keeps anchors stable when lodestones move, using UUID-based identities and player-visible names.
 - Carries the player's mounted and leashed entities when the destination is valid.
 - Preserves the distinction between normal travel and explicitly enabled cross-dimensional travel.
@@ -30,15 +32,19 @@ A portable Teleporter holds **four Ender Pearls**. Hold the device and pearls in
 
 A normal Teleporter only works within the destination's dimension. A **Dimensional Teleporter** can also travel between the Overworld, Nether, End and valid modded dimensions, using the same single pearl per attempt.
 
+Right-click either portable device on a lodestone to change its link without spending fuel or losing its manual name. Travel requires a **Calibrated Lodestone**. Linking to a normal lodestone succeeds, but the action bar explains that teleportation is unavailable. Recovery-crafted devices are named **Recovery Teleporter** and **Dimensional Recovery Teleporter**; their needles point to the player's last death. Relinking changes them to the corresponding lodestone-targeted device.
+
+The hotbar shade and crosshair indicator share the server's per-hand readiness state. Failure messages appear briefly in the action bar, not chat, and distinguish the reason (empty fuel, warming up, invalid or uncalibrated anchor, moving anchor, missing death, unavailable or wrong dimension, unsafe arrival, and passenger restrictions). [Full message list](docs/ACTION-BAR-MESSAGES.md).
+
 **Fuel is spent before the destination is checked.** A broken anchor, missing death, wrong dimension or blocked arrival still costs one pearl and applies vanilla Ender Pearl damage. There are no refunds. An empty device or an unarmed portable device cannot start an attempt. Only the activating player takes the damage.
 
 ## Recipes
 
-Crafting is component-aware: linked destinations, manual names and relevant item data survive conversion and upgrades.
+Crafting is component-aware: linked destinations, manual names and relevant item data survive conversion and upgrades. Recipes have vanilla recipe-book displays and unlock when you acquire their relevant ingredients.
 
 ### Calibrated lodestone
 
-This replaces the vanilla recipe:
+This crafts the new `lodestone_transit:calibrated_lodestone`. The vanilla lodestone keeps its original recipe and appearance:
 
 ```text
 C A C    C = Chiseled Stone Bricks
@@ -46,7 +52,7 @@ C I C    A = Amethyst Shard
 C C C    I = Iron Ingot
 ```
 
-Seven chiseled stone bricks, one amethyst shard and one iron ingot. A small amethyst inlay distinguishes its otherwise familiar vanilla appearance.
+Seven chiseled stone bricks, one amethyst shard and one iron ingot. A small amethyst bud crowns the vanilla stone body, with purple inlays at the centers of its sides. Existing ordinary lodestones are not converted automatically.
 
 ### Teleporter
 
@@ -56,7 +62,7 @@ E C E    A = Amethyst Shard
 E E E    C = Compass or Recovery Compass
 ```
 
-Seven eyes of ender, one amethyst shard and one compass. A linked vanilla compass is accepted, including one created before installing this mod if its lodestone still exists.
+Seven eyes of ender, one **Amethyst Shard** (`minecraft:amethyst_shard`, the dropped fragment, not a bud or cluster) and one compass. A linked vanilla compass is accepted, including one created before installing this mod if its lodestone still exists. Its destination still needs calibration before it can be used for travel.
 
 ### Dimensional upgrade
 
@@ -108,7 +114,11 @@ The player's mount and its passenger hierarchy are essential: they travel togeth
 
 No permanent chunk loader is installed. Successful arrivals use vanilla temporary portal tickets, expiring after 300 ticks.
 
+![Hand-authored compass accents and needle orientations](docs/images/teleporter-design.png)
+
 ## Optional compatibility
+
+- **p1kl's 3D Items:** enable the included **Lodestone Transit: p1kl’s 3D Items** resource pack above p1kl's external pack. It references p1kl's animated compass geometry in hand and keeps our decorated flat compasses in the GUI. No external textures or models are bundled. If p1kl is disabled, the bridge selects the regular flat models. The vp26 version is `GaCryZnJ`.
 
 - **Pushier Pistons 1.0-mc26.2 / FrozenLib 2.5.3-mc26.2:** stations opt into FrozenLib's `has_pushable_block_entity` tag so its normal movement preserves their data and inventory.
 - **Alex's Mobs Continued:** registry-based Dimensional Carver integration; no hard dependency or copied code/assets.

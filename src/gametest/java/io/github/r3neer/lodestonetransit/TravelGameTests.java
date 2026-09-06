@@ -27,7 +27,7 @@ public final class TravelGameTests {
         for (var pos : BlockPos.betweenClosed(center.offset(-6,-1,-6), center.offset(6,5,6))) level.setBlock(pos, pos.getY() == center.getY()-1 ? Blocks.STONE.defaultBlockState() : Blocks.AIR.defaultBlockState(), 3);
     }
     private static TeleportDestination anchor(GameTestHelper h, BlockPos pos) {
-        h.getLevel().setBlockAndUpdate(pos, Blocks.LODESTONE.defaultBlockState()); return TeleportDestination.anchor(AnchorRegistry.get(h.getLevel().getServer()).adopt(h.getLevel(), pos).id());
+        h.getLevel().setBlockAndUpdate(pos, LodestoneTransit.CALIBRATED_LODESTONE.defaultBlockState()); return TeleportDestination.anchor(AnchorRegistry.get(h.getLevel().getServer()).adopt(h.getLevel(), pos).id());
     }
     private static void stationAttempt(GameTestHelper h, ServerPlayer player, TeleportDestination destination, boolean dimensional, int fuel) {
         var pos = h.absolutePos(new BlockPos(1,1,1)); var block = dimensional ? LodestoneTransit.DIMENSIONAL_STATION : LodestoneTransit.STATION;

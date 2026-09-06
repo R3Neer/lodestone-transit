@@ -25,6 +25,10 @@ public final class DestinationNaming {
     }
     public static Component name(ItemStack stack, Component fallback) {
         if (!stack.has(LodestoneTransit.DESTINATION)) return fallback;
+        if (stack.get(LodestoneTransit.DESTINATION).kind() == io.github.r3neer.lodestonetransit.teleport.TeleportDestination.Kind.LAST_DEATH) {
+            if (stack.is(LodestoneTransit.TELEPORTER)) return Component.translatable("item.lodestone_transit.recovery_teleporter");
+            if (stack.is(LodestoneTransit.DIMENSIONAL_TELEPORTER)) return Component.translatable("item.lodestone_transit.dimensional_recovery_teleporter");
+        }
         String kind = stack.is(Items.COMPASS) ? "compass" : stack.is(LodestoneTransit.STATION.asItem()) ? "station" : stack.is(LodestoneTransit.DIMENSIONAL_STATION.asItem()) ? "dimensional_station" : stack.is(LodestoneTransit.DIMENSIONAL_TELEPORTER) ? "dimensional_teleporter" : "teleporter";
         return Component.translatable("transit.name." + kind, destination(stack));
     }

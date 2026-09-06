@@ -17,7 +17,7 @@ public abstract class AnchorRemovalMixin {
     @Shadow public abstract Level getLevel();
     @Inject(method = "setBlockState", at = @At("RETURN"))
     private void transit$removed(BlockPos pos, BlockState state, int flags, CallbackInfoReturnable<BlockState> cir) {
-        if (getLevel() instanceof ServerLevel level && cir.getReturnValue() != null && cir.getReturnValue().is(Blocks.LODESTONE) && !state.is(Blocks.LODESTONE))
+        if (getLevel() instanceof ServerLevel level && cir.getReturnValue() != null && io.github.r3neer.lodestonetransit.anchor.AnchorBlocks.isAnchor(cir.getReturnValue()) && !state.is(cir.getReturnValue().getBlock()))
             AnchorRegistry.get(level.getServer()).invalidate(GlobalPos.of(level.dimension(), pos));
     }
 }

@@ -3,6 +3,7 @@ package io.github.r3neer.lodestonetransit.block;
 import com.mojang.serialization.MapCodec;
 import io.github.r3neer.lodestonetransit.item.EquipReadiness;
 import io.github.r3neer.lodestonetransit.teleport.TeleportService;
+import io.github.r3neer.lodestonetransit.teleport.TravelMessage;
 import java.util.List;
 import net.minecraft.core.*;
 import net.minecraft.server.level.*;
@@ -31,7 +32,10 @@ public final class TeleportStationBlock extends BaseEntityBlock {
         if (level.getBlockEntity(pos) instanceof TeleportStationBlockEntity station) station.preserveItem(stack);
     }
     @Override protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (player instanceof ServerPlayer server && EquipReadiness.attemptedThisTick(server)) return InteractionResult.SUCCESS;
         if (stack.is(Items.ENDER_PEARL)) {
+            if (player instanceof ServerPlayer server && !(level.getBlockEntity(pos) instanceof TeleportStationBlockEntity)) TravelMessage.STATION_UNAVAILABLE.fail(server);
+            if (player instanceof ServerPlayer server && level.getBlockEntity(pos) instanceof TeleportStationBlockEntity station && station.getItem(0).getCount() >= 16) TravelMessage.FUEL_FULL.show(server);
             if (player instanceof ServerPlayer server && level.getBlockEntity(pos) instanceof TeleportStationBlockEntity station && station.getItem(0).getCount() < 16 && EquipReadiness.claimAttempt(server)) {
                 var fuel = station.getItem(0); if (fuel.isEmpty()) station.setItem(0, new ItemStack(Items.ENDER_PEARL)); else { fuel.grow(1); station.setChanged(); }
                 stack.consume(1, player); level.playSound(null, pos, SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.BLOCKS, .5f, 1.1f);
@@ -42,10 +46,11 @@ public final class TeleportStationBlock extends BaseEntityBlock {
     }
     @Override protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) { return activate(level, pos, player); }
     private InteractionResult activate(Level level, BlockPos pos, Player player) {
+        if (player instanceof ServerPlayer server && EquipReadiness.attemptedThisTick(server)) return InteractionResult.SUCCESS;
         if (player instanceof ServerPlayer server && level.getBlockEntity(pos) instanceof TeleportStationBlockEntity station) {
-            if (station.isEmpty()) { TeleportService.feedback(server, false); return InteractionResult.SUCCESS; }
+            if (station.isEmpty()) { TravelMessage.NO_FUEL.fail(server); return InteractionResult.SUCCESS; }
             if (EquipReadiness.claimAttempt(server)) { station.removeItem(0, 1); TeleportService.attempt(server, station.destination(), dimensional); }
-        }
+        } else if (player instanceof ServerPlayer server) TravelMessage.STATION_UNAVAILABLE.fail(server);
         return InteractionResult.SUCCESS;
     }
     @Override protected boolean hasAnalogOutputSignal(BlockState state) { return true; }

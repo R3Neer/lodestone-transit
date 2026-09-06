@@ -1,9 +1,13 @@
 {
-  "parent": "minecraft:block/cube",
+  "parent": "minecraft:block/block",
   "textures": {
-    "particle": "minecraft:block/chiseled_stone_bricks",
-    "side": "minecraft:block/chiseled_stone_bricks",
-    "top": "lodestone_transit:block/dimensional_teleport_station_top"
+    "particle": "minecraft:block/lodestone_side",
+    "side": "minecraft:block/lodestone_side",
+    "top": "minecraft:block/lodestone_top",
+    "inlay": "lodestone_transit:block/calibration_inlay",
+    "bud": "minecraft:block/small_amethyst_bud",
+    "dial": "lodestone_transit:block/station_dial",
+    "accent": "lodestone_transit:block/dimensional_teleporter_inlay"
   },
   "elements": [
     {
@@ -20,27 +24,201 @@
       "faces": {
         "up": {
           "texture": "#top",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
           "cullface": "up"
         },
         "down": {
-          "texture": "#side",
+          "texture": "#top",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
           "cullface": "down"
         },
         "north": {
           "texture": "#side",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
           "cullface": "north"
         },
         "south": {
           "texture": "#side",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
           "cullface": "south"
-        },
-        "east": {
-          "texture": "#side",
-          "cullface": "east"
         },
         "west": {
           "texture": "#side",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
           "cullface": "west"
+        },
+        "east": {
+          "texture": "#side",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "cullface": "east"
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        0,
+        -0.008
+      ],
+      "to": [
+        16,
+        16,
+        -0.008
+      ],
+      "faces": {
+        "north": {
+          "texture": "#inlay",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        0,
+        16.008
+      ],
+      "to": [
+        16,
+        16,
+        16.008
+      ],
+      "faces": {
+        "south": {
+          "texture": "#inlay",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        -0.008,
+        0,
+        0
+      ],
+      "to": [
+        -0.008,
+        16,
+        16
+      ],
+      "faces": {
+        "west": {
+          "texture": "#inlay",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        16.008,
+        0,
+        0
+      ],
+      "to": [
+        16.008,
+        16,
+        16
+      ],
+      "faces": {
+        "east": {
+          "texture": "#inlay",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        16.016,
+        0
+      ],
+      "to": [
+        16,
+        16.016,
+        16
+      ],
+      "faces": {
+        "up": {
+          "texture": "#dial",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        16.028,
+        0
+      ],
+      "to": [
+        16,
+        16.028,
+        16
+      ],
+      "faces": {
+        "up": {
+          "texture": "#accent",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
         }
       }
     }

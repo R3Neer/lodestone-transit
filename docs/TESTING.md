@@ -10,9 +10,13 @@ and the current Fabric 26.2 example project, rather than old mapping tutorials.
 ## Automated tests
 
 `gradlew.bat build` compiles the distributable and sources JAR, runs four JUnit
-landing-score tests and runs 22 required dedicated-server GameTests (21 mod tests
+landing-score tests and runs 25 required dedicated-server GameTests (24 mod tests
 plus Fabric's framework test). The suite covers:
 
+- Loaded recipes through a real crafting table, taking and shift-clicking results;
+  recipe-book displays and placement ingredients; distinct recovery names/models.
+- Both portable variants, both hands, ordinary/calibrated rebinding, preserved fuel
+  and manual names, unavailable destinations and calibrated anchor destruction.
 - Compass, recovery and spawn crafting; component/name transfer; station charges;
   dimensional upgrades; one-point catalyst wear and last-use breakage.
 - Anchor adoption, rename, destruction, replacement identity and movement.
@@ -32,11 +36,17 @@ plus Fabric's framework test). The suite covers:
 `gradlew.bat runClientGameTest` runs one real-client integrated-world scenario.
 It checks the server-to-client anchor name and its subsequent rename, renders
 the lodestone, both station variants and all new items, and takes world/inventory
-screenshots. The screenshots were visually inspected: no missing mod textures
-or model errors were found. This is automated client verification, not a human
+screenshots. The screenshots are visually inspected for model, texture and atlas errors.
+With `-Pp1klResourcePack=C:/path/to/p1kl.zip`, Gradle copies the locally supplied
+ZIP after test-directory cleanup. The scenario additionally enables the bridge,
+checks detection, captures both portable 3D variants, removes the external pack,
+and checks and captures the flat fallback. It waits for the loading overlay to
+disappear before taking each screenshot. p1kl itself reports missing particle
+references and unrelated item resources on 26.2; those upstream warnings are not
+a claim of compatibility for every item in that pack. This is automated client verification, not a human
 gameplay session.
 
-The optional profile uses the same 22-test suite with these actual installed JARs:
+The optional profile uses the same 25-test suite with these actual installed JARs:
 
 | Mod | Verified version |
 | --- | --- |
@@ -60,8 +70,9 @@ features for a future Gradle 10 migration; this project pins Gradle 9.5.1.
 
 ## Human playtest checklist
 
-No human playtest has been performed. Keep the version at **0.1.0** until one is
-completed. In particular, test the feel of readiness, feedback and failure costs,
+The first human playtest reported recipe and readiness defects and requested the
+visual redesign. Keep the version at **0.1.0** while the revised experience is
+being evaluated. In particular, test the feel of readiness, feedback and failure costs,
 survival crafting/anvil workflows, recovery after death, ordinary multiplayer
 latency, server restarts and chunk unloading, long and cyclic animal chains,
 modded body-size changes, and the user's full combat modpack. The automated
@@ -84,7 +95,8 @@ client scenario does not replace those checks.
 - Unexpected entity factories or cancellation hooks from unrelated mods are not
   assumed compatible. The main group's dimensional factories are preflighted;
   ordinary vanilla passenger transport and the tested optional mods are supported.
-- No advancements were added: the specification explicitly permits omitting them.
+- Hidden recipe-unlock advancements expose the crafting recipes; there is no
+  separate progression or achievement tree.
 
 ## Sources inspected
 
@@ -99,3 +111,10 @@ client scenario does not replace those checks.
   metadata and tag data inspected before selecting the integration.
 - [Alex's Mobs Continued](https://github.com/Codx-org/Alexs-Mobs-Updated-Ported):
   installed 26.2 registry item and dependency metadata, then actual runtime tests.
+
+## Local OneDrive build
+
+The normal project build was verified from its OneDrive folder. Windows had marked
+generated build directories read-only; clearing that attribute resolved Gradle
+directory replacement failures. No project relocation or machine-specific build
+path is required by the committed configuration.

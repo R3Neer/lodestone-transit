@@ -1,0 +1,264 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "minecraft:block/lodestone_side",
+    "side": "minecraft:block/lodestone_side",
+    "top": "minecraft:block/lodestone_top",
+    "inlay": "lodestone_transit:block/calibration_inlay",
+    "bud": "minecraft:block/small_amethyst_bud"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "up": {
+          "texture": "#top",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "cullface": "up"
+        },
+        "down": {
+          "texture": "#top",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "cullface": "down"
+        },
+        "north": {
+          "texture": "#side",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "cullface": "north"
+        },
+        "south": {
+          "texture": "#side",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "cullface": "south"
+        },
+        "west": {
+          "texture": "#side",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "cullface": "west"
+        },
+        "east": {
+          "texture": "#side",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "cullface": "east"
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        0,
+        -0.008
+      ],
+      "to": [
+        16,
+        16,
+        -0.008
+      ],
+      "faces": {
+        "north": {
+          "texture": "#inlay",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        0,
+        16.008
+      ],
+      "to": [
+        16,
+        16,
+        16.008
+      ],
+      "faces": {
+        "south": {
+          "texture": "#inlay",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        -0.008,
+        0,
+        0
+      ],
+      "to": [
+        -0.008,
+        16,
+        16
+      ],
+      "faces": {
+        "west": {
+          "texture": "#inlay",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        16.008,
+        0,
+        0
+      ],
+      "to": [
+        16.008,
+        16,
+        16
+      ],
+      "faces": {
+        "east": {
+          "texture": "#inlay",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        0.8,
+        16,
+        8
+      ],
+      "to": [
+        15.2,
+        32,
+        8
+      ],
+      "faces": {
+        "north": {
+          "texture": "#bud",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#bud",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        }
+      },
+      "rotation": {
+        "origin": [
+          8,
+          24,
+          8
+        ],
+        "axis": "y",
+        "angle": 45,
+        "rescale": true
+      },
+      "shade": false
+    },
+    {
+      "from": [
+        8,
+        16,
+        0.8
+      ],
+      "to": [
+        8,
+        32,
+        15.2
+      ],
+      "faces": {
+        "west": {
+          "texture": "#bud",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#bud",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        }
+      },
+      "rotation": {
+        "origin": [
+          8,
+          24,
+          8
+        ],
+        "axis": "y",
+        "angle": 45,
+        "rescale": true
+      },
+      "shade": false
+    }
+  ]
+}

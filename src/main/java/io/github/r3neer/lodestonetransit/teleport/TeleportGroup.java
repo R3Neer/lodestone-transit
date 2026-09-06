@@ -11,6 +11,8 @@ public final class TeleportGroup {
     private record Edge(Entity child, UUID holder) {}
     private final Entity root;
     private final List<Edge> edges = new ArrayList<>();
+    private boolean leftBehind;
+    public boolean leftBehind() { return leftBehind; }
     public TeleportGroup(Entity player) {
         root = player.getRootVehicle();
         var queue = new ArrayDeque<Entity>(SafeLandingFinder.passengers(root));
@@ -26,11 +28,15 @@ public final class TeleportGroup {
         }
     }
     public Entity root() { return root; }
-    public boolean travel(ServerLevel destination, Vec3 pos) {
+    public boolean canTravel(ServerLevel destination) {
         var essential = SafeLandingFinder.passengers(root);
         for (var entity : essential) if (!entity.isAlive() || !entity.canTeleport(entity.level(), destination)) return false;
         // Check constructors before vanilla moves passengers, to avoid a partial group on null factories.
         if (root.level() != destination) for (var e : essential) if (!(e instanceof net.minecraft.server.level.ServerPlayer) && e.getType().create(destination, EntitySpawnReason.DIMENSION_TRAVEL) == null) return false;
+        return true;
+    }
+    public boolean travel(ServerLevel destination, Vec3 pos) {
+        if (!canTravel(destination)) return false;
         var moved = new HashMap<UUID, Entity>();
         var main = teleport(root, destination, pos);
         if (main == null) return false;
@@ -42,11 +48,11 @@ public final class TeleportGroup {
             if (moved.containsKey(edge.child.getUUID())) continue;
             var child = edge.child;
             var landing = child.canTeleport(child.level(), destination) ? SafeLandingFinder.find(destination, child, main.position(), 3, occupied) : Optional.<Vec3>empty();
-            if (landing.isEmpty()) { ((Leashable)child).dropLeash(); continue; }
+            if (landing.isEmpty()) { leftBehind = true; ((Leashable)child).dropLeash(); continue; }
             var arrived = teleport(child, destination, landing.get());
             if (arrived instanceof Leashable leash) {
                 leash.setLeashedTo(holder, true); moved.put(arrived.getUUID(), arrived); occupied.add(arrived.getBoundingBox());
-            } else if (!child.isRemoved()) ((Leashable)child).dropLeash();
+            } else { leftBehind = true; if (!child.isRemoved()) ((Leashable)child).dropLeash(); }
         }
         // Rebuild also back-edges/cycles and links involving an essential passenger.
         for (var edge : edges) {
