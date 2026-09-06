@@ -1,10 +1,20 @@
 # Lodestone Transit
 
+[![Build and test](https://github.com/R3Neer/lodestone-transit/actions/workflows/build.yml/badge.svg)](https://github.com/R3Neer/lodestone-transit/actions/workflows/build.yml)
+
 Fast travel built from Minecraft's own navigation systems: compasses define destinations, lodestones anchor them, and ender pearls power the journey.
 
 A Fabric mod for **Minecraft 26.2**, requiring **Fabric API**, **Fabric Loader 0.19.5+** and **Java 25**. Install the mod on both the client and server. Version **0.1.0** is an initial implementation awaiting human playtesting.
 
 There are no waypoint menus, destination lists, energy networks or teleport commands. Make a device from a compass, carry pearls, and keep its physical anchor intact.
+
+## Highlights
+
+- Guides a compass-bound player to spawn, a named lodestone, or their last death position.
+- Supports portable travel and lodestone stations with configurable storage.
+- Keeps anchors stable when lodestones move, using UUID-based identities and player-visible names.
+- Carries the player's mounted and leashed entities when the destination is valid.
+- Preserves the distinction between normal travel and explicitly enabled cross-dimensional travel.
 
 ## Navigation and portable use
 
