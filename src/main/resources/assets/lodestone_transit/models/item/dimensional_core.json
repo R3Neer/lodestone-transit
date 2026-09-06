@@ -1,7 +1,1 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "minecraft:item/nether_star",
-    "layer1": "lodestone_transit:item/core_inlay"
-  }
-}
+{"parent":"minecraft:item/generated","textures":{"layer0":"lodestone_transit:item/dimensional_core"}}

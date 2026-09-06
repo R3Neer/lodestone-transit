@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.client.networking.v1.*;
 
 public final class LodestoneTransitClient implements ClientModInitializer {
     @Override public void onInitializeClient() {
+        net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperties.ID_MAPPER.put(LodestoneTransit.id("charges"), io.github.r3neer.lodestonetransit.item.ChargeModelProperty.CODEC);
         io.github.r3neer.lodestonetransit.mixin.ModelPropertyRegistryAccessor.transit$registry().put(LodestoneTransit.id("p1kl_available"), io.github.r3neer.lodestonetransit.compat.P1klAvailable.CODEC);
         net.fabricmc.fabric.api.resource.ResourceManagerHelper.registerBuiltinResourcePack(LodestoneTransit.id("p1kl_compat"),
             net.fabricmc.loader.api.FabricLoader.getInstance().getModContainer("lodestone_transit").orElseThrow(),

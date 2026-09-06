@@ -1,6 +1,6 @@
 # First human playtest: diagnosis and implemented follow-up
 
-Recorded on 2026-09-06. The implementation below now includes the requested behavior and hand-authored, vanilla-referenced artwork. The diagnostic evidence records the original defects. See TESTING.md for current verification and ACTION-BAR-MESSAGES.md for the message list written before implementation.
+Recorded on 2026-09-06. The implementation below now includes the requested behavior and native-resolution, vanilla-referenced artwork created by an AI agent operating Piskel (see PROVENANCE.md). The diagnostic evidence records the original defects. See TESTING.md for current verification and ACTION-BAR-MESSAGES.md for the message list written before implementation.
 
 ## Original defects and diagnostic evidence
 
@@ -31,21 +31,19 @@ Retain the full vanilla lodestone body and its recognizable stone patterns. Add 
 
 ## Implemented portable device design
 
-Keep the compass outline, metal rim, dark dial and prominent moving needle. Use a restrained amethyst accent at the cardinal points of the rim and a small ender-green detail around the needle pivot. The dial must remain readable at normal hotbar size. Avoid a large eye graphic covering the needle.
+The final portable design uses a stepped rounded 16px silhouette, a moving amethyst needle and four curved, beveled Ender Pearl fragments. The normal casing is gray metal; the dimensional casing is ivory. Recovery-derived devices share the ordinary artwork, changing their default name and destination behavior.
 
-For the dimensional version, preserve the same silhouette and dial; use a darker rim, pale end-stone-colored corner accents and a double amethyst notch so the distinction is not color alone. After the user's clarification, Recovery uses exactly the ordinary device artwork and 3D model, with a recovery default name and death-target needle behavior.
-
-The finished overlays are hand-authored 16-pixel assets. All variants use the same 32 vanilla compass frames. No AI art or third-party artwork is redistributed.
+Original pixel masters were drawn through Piskel by an AI agent. The build assembles 32 needle orientations for each of five charge states. See [PROVENANCE.md](PROVENANCE.md) for authorship and references.
 
 ## Implemented station design
 
-Use a lodestone-like stone body with the teleporter dial visibly embedded horizontally in the top, surrounded by a narrow amethyst bezel. Keep the top nearly flush, distinguishing a departure station from the calibrated anchor's upright bud. Carry small side inlays across the family. The dimensional station can use the same double-notch and pale corner accents as its portable version. Avoid tall pedestals, mechanical panels and emissive effects that obscure the stone construction.
+The lodestone-like body supports an original 9 x 9 x 2 model of the portable instrument, rotated diagonally above the top. Each side has four curved pearl sockets surrounding an amethyst center: sixteen sockets in total. The dimensional variant uses ivory accents. Station light rises one level per four pearls, or two levels per four pearls for the dimensional variant.
 
 ## Exact vp26 3D resource-pack evidence and integration boundary
 
 The pack manifest identifies **p1kl's 3D Items**, project `GkQMxGSm`, pinned version `GaCryZnJ`; it is a client resource pack, not a mod. Its inspected ZIP contains `assets/minecraft/items/compass.json`, `recovery_compass.json`, and 32 `minecraft:item/compass_XX_in_hand` models (plus recovery counterparts). Its item definition uses compass angle range dispatch and display-context selection to retain flat GUI representations and use 3D models in hand.
 
-Recommendation: keep destination state and angle selection in Lodestone Transit; ship an optional resource-pack bridge that references p1kl's models and adds our own small accents. Another Java compatibility mod is unnecessary for a model-only integration. Default rendering must work without the pack, and the bridge automatically falls back to flat models when its required pack is absent. Do not copy p1kl's assets into the GPL mod: the project's reported license is All Rights Reserved. The pinned ZIP is exercised by the optional client-test profile, including resource reload and removal. The bridge supplies its own accent geometry and inherits upstream display transforms.
+The optional included bridge selects our own device models for hand rendering when p1kl is available. Geometry is original, informed by the inspected compass dimensions; upstream textures and models are not bundled. Default rendering works without the external pack. The pinned ZIP is exercised by the optional client-test profile, including resource reload and removal. Another Java compatibility mod is unnecessary for this model-only integration.
 
 ## Design references
 
@@ -53,8 +51,8 @@ Recommendation: keep destination state and angle selection in Lodestone Transit;
 - [Fabric: Item Models](https://docs.fabricmc.net/develop/items/item-models): model geometry and texture structure. Check version-specific implementation against the local Minecraft 26.2 assets and classes.
 - [p1kl's 3D Items](https://modrinth.com/resourcepack/p1kls-3d-items): upstream resource pack; the vp26 manifest fixes the inspected version.
 
-## Validation status
+## Historical diagnostic validation
 
-Production behavior and artwork have not been changed by this diagnosis. Manual rendering and the user's specific failing ingredient arrangement remain to be reproduced. The initial diagnostic build hit a OneDrive directory-deletion error; a temporary external build directory is used for the runtime test without deleting the user's generated files or worlds.
+At the time of the original diagnosis, production behavior and artwork had not yet been changed. Current behavior and validation are documented in TESTING.md. Manual rendering and the user's specific failing ingredient arrangement remain to be reproduced. The initial diagnostic build hit a OneDrive directory-deletion error; a temporary external build directory is used for the runtime test without deleting the user's generated files or worlds.
 
 Runtime result: all 23 required GameTests passed, including the new crafting-menu test covering ordinary-compass teleporter, recovery teleporter, core, both stations, dimensional upgrade and the modified lodestone recipe. Every case produced an output, allowed shift-click extraction and consumed its ingredients. This proves those server crafting paths in the tested baseline; it does not invalidate the reported manual failure or prove the client's recipe book works. The player's layout matches; the precise identity of the second amethyst ingredient remains unconfirmed. No optional packs/mods were loaded for this test.

@@ -89,7 +89,7 @@ public final class IntegrationGameTests {
         h.succeedWhen(()-> {
             var arrivedHorse=target.getEntity(horse.getUUID()); var arrivedCow=target.getEntity(cow.getUUID()); var arrivedSheep=target.getEntity(sheep.getUUID());
             h.assertTrue(arrivedHorse!=null && p.getVehicle()==arrivedHorse && p.level()==target,Component.literal("cross-dimensional mount registration: lookup="+arrivedHorse+", vehicle="+p.getVehicle()+", dimension="+p.level().dimension()));
-            check(arrivedCow instanceof Leashable first && first.getLeashHolder()==p && arrivedSheep instanceof Leashable second && second.getLeashHolder()==arrivedCow,"cross-dimensional chain reconstruction");
+            check(arrivedCow instanceof Leashable first && first.getLeashHolder()==p && arrivedSheep instanceof Leashable second && second.getLeashHolder()==arrivedCow,"cross-dimensional chain reconstruction: cow="+arrivedCow+", cow holder="+(arrivedCow instanceof Leashable c ? c.getLeashHolder() : null)+", sheep="+arrivedSheep+", sheep holder="+(arrivedSheep instanceof Leashable s ? s.getLeashHolder() : null)+", player="+p);
             check(h.getLevel().getEntity(horse.getUUID())==null && h.getLevel().getEntity(cow.getUUID())==null,"no origin duplicates");
         });
     }

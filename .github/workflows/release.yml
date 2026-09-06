@@ -1,0 +1,44 @@
+name: Prepare GitHub beta
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing version tag to build (for example v0.1.0-beta.1)
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Validate tag against version
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: |
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          version = next(l.split('=',1)[1].strip() for l in Path('gradle.properties').read_text().splitlines() if l.startswith('version='))
+          assert os.environ['RELEASE_TAG'] == 'v' + version
+          assert '-beta.' in version
+          PY
+      - name: Build and verify
+        run: |
+          bash gradlew build
+          python3 tools/verify_release.py
+      - name: Create reviewable prerelease draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: gh release create "$RELEASE_TAG" build/libs/*.jar build/release/SHA256SUMS --verify-tag --draft --prerelease --title "Lodestone Transit $RELEASE_TAG" --notes-file CHANGELOG.md

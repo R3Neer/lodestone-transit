@@ -15,8 +15,9 @@ import net.minecraft.world.level.storage.*;
 public final class TeleportStationBlockEntity extends BlockEntity implements Container, net.minecraft.world.Nameable {
     private ItemStack embedded = ItemStack.EMPTY;
     private ItemStack fuel = ItemStack.EMPTY;
+    private boolean pendingLightCheck = true;
     public TeleportStationBlockEntity(BlockPos pos, BlockState state) { super(LodestoneTransit.STATION_ENTITY, pos, state); }
-    public TeleportDestination destination() { return embedded.get(LodestoneTransit.DESTINATION); }
+    public TeleportDestination destination() { return embedded.getOrDefault(LodestoneTransit.DESTINATION, TeleportDestination.spawn()); }
     @Override public net.minecraft.network.chat.Component getName() {
         var custom = embedded.get(DataComponents.CUSTOM_NAME);
         if (custom != null) return custom;
@@ -48,6 +49,7 @@ public final class TeleportStationBlockEntity extends BlockEntity implements Con
     public void preserveItem(ItemStack placed) { embedded = placed.copyWithCount(1); embedded.remove(LodestoneTransit.CHARGES); setChanged(); }
     @Override protected void loadAdditional(ValueInput input) {
         super.loadAdditional(input);
+        pendingLightCheck = true;
         embedded = input.read("embedded", ItemStack.CODEC).orElse(ItemStack.EMPTY);
         fuel = input.read("fuel", ItemStack.CODEC).filter(s -> s.is(Items.ENDER_PEARL)).orElse(ItemStack.EMPTY);
         if (!fuel.isEmpty()) fuel.setCount(Math.min(16, fuel.getCount()));
@@ -63,10 +65,28 @@ public final class TeleportStationBlockEntity extends BlockEntity implements Con
     @Override public boolean isEmpty() { return fuel.isEmpty(); }
     @Override public ItemStack getItem(int slot) { return slot == 0 ? fuel : ItemStack.EMPTY; }
     @Override public ItemStack removeItem(int slot, int count) { if (slot != 0 || count <= 0) return ItemStack.EMPTY; var result = fuel.split(count); setChanged(); return result; }
-    @Override public ItemStack removeItemNoUpdate(int slot) { if (slot != 0) return ItemStack.EMPTY; var result = fuel; fuel = ItemStack.EMPTY; return result; }
+    @Override public ItemStack removeItemNoUpdate(int slot) { if (slot != 0) return ItemStack.EMPTY; var result = fuel; fuel = ItemStack.EMPTY; setChanged(); return result; }
     @Override public void setItem(int slot, ItemStack stack) { if (slot != 0 || (!stack.isEmpty() && !canPlaceItem(slot, stack))) return; fuel = stack; if (!fuel.isEmpty()) fuel.setCount(Math.min(16, fuel.getCount())); setChanged(); }
     @Override public boolean canPlaceItem(int slot, ItemStack stack) { return slot == 0 && stack.is(Items.ENDER_PEARL); }
     @Override public boolean stillValid(Player player) { return Container.stillValidBlockEntity(this, player); }
     @Override public void clearContent() { fuel = ItemStack.EMPTY; setChanged(); }
-    @Override public void setChanged() { super.setChanged(); if (level != null) level.updateNeighbourForOutputSignal(worldPosition, getBlockState().getBlock()); }
+    /** State is derived from the real slot, including hopper changes and older saved chunks. */
+    public void syncPearls() {
+        if (level == null || level.isClientSide()) return;
+        var state = level.getBlockState(worldPosition);
+        if (!(state.getBlock() instanceof TeleportStationBlock)) return;
+        int count = Math.clamp(fuel.getCount(), 0, 16);
+        if (state.getValue(TeleportStationBlock.PEARLS) != count) {
+            level.setBlock(worldPosition, state.setValue(TeleportStationBlock.PEARLS, count), 3);
+        }
+        // Older chunks can retain pre-lighting cached light with the same pearl state.
+        if (pendingLightCheck) {
+            pendingLightCheck = false;
+            level.getChunkSource().getLightEngine().checkBlock(worldPosition);
+        }
+    }
+    @Override public void setChanged() {
+        super.setChanged();
+        if (level != null) { syncPearls(); level.updateNeighbourForOutputSignal(worldPosition, getBlockState().getBlock()); }
+    }
 }

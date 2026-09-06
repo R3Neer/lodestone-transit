@@ -10,7 +10,7 @@ and the current Fabric 26.2 example project, rather than old mapping tutorials.
 ## Automated tests
 
 `gradlew.bat build` compiles the distributable and sources JAR, runs four JUnit
-landing-score tests and runs 26 required dedicated-server GameTests (25 mod tests
+landing-score tests and runs 30 required dedicated-server GameTests (29 mod tests
 plus Fabric's framework test). The suite covers:
 
 - Loaded recipes through a real crafting table, taking and shift-clicking results;
@@ -25,6 +25,12 @@ plus Fabric's framework test). The suite covers:
 - A real vanilla piston moving a named lodestone and refreshing an existing compass.
 - Station serialization, manual-name preservation, fuel-free block-item drops,
   pearl-only inventory and all sixteen intermediate comparator fullness states.
+- Spawn-targeted station crafting and creative defaults, placement, save/load,
+  missing-destination fallback, and preservation of broken anchor links.
+- Station loading with either hand, including empty/non-pearl main hands, main-hand
+  priority when both hold pearls, full storage and same-tick duplicate suppression.
+- Charge-dependent block-light propagation in both directions and refreshing old
+  unlit station caches. These asynchronous sequences have a 200-tick upper bound.
 - Real hopper input/output, rejecting non-pearl items.
 - Fuel consumption for missing anchors/death, wrong dimensions and solid destinations;
   no-charge attempts; same-dimensional and cross-dimensional station use.
@@ -36,7 +42,8 @@ plus Fabric's framework test). The suite covers:
 - Automatic names, anchor rename and manual-name precedence.
 
 `gradlew.bat runClientGameTest` runs one real-client integrated-world scenario.
-It checks actual client-received station counter messages and distinct empty/full
+It checks portable tooltip counts from 0 / 4 to 4 / 4 for both variants,
+actual client-received station counter messages and distinct empty/full
 sound events, rejected insertion without item loss, and preservation of a travel
 failure reason alongside the remaining count. It also checks the server-to-client
 anchor name and its subsequent rename, renders
@@ -51,7 +58,8 @@ references and unrelated item resources on 26.2; those upstream warnings are not
 a claim of compatibility for every item in that pack. This is automated client verification, not a human
 gameplay session.
 
-The optional profile uses the same 26-test suite with these actual installed JARs:
+The optional profile was previously verified with the then-current 26-test suite
+and these actual installed JARs:
 
 | Mod | Verified version |
 | --- | --- |
@@ -76,7 +84,7 @@ features for a future Gradle 10 migration; this project pins Gradle 9.5.1.
 ## Human playtest checklist
 
 The first human playtest reported recipe and readiness defects and requested the
-visual redesign. Keep the version at **0.1.0** while the revised experience is
+visual redesign. The version is **0.1.0-beta.1** while the revised experience is
 being evaluated. In particular, test the feel of readiness, feedback and failure costs,
 survival crafting/anvil workflows, recovery after death, ordinary multiplayer
 latency, server restarts and chunk unloading, long and cyclic animal chains,
@@ -123,3 +131,28 @@ The normal project build was verified from its OneDrive folder. Windows had mark
 generated build directories read-only; clearing that attribute resolved Gradle
 directory replacement failures. No project relocation or machine-specific build
 path is required by the committed configuration.
+
+## Beta distribution validation (2026-09-06)
+
+The 0.1.0-beta.1 snapshot compiled outside OneDrive with an isolated Gradle cache,
+passed four JUnit tests and all 30 required server GameTests. The distributable
+verifier checks metadata, both languages, 337 native 16x16 textures, model state
+references, archive boundaries and SHA-256 checksums. Original Minecraft-namespace
+fallback aliases and atlas references are explicitly allowlisted by content.
+
+A separate project created with `python tools/create_binary_validation.py <new-directory>`
+loads the production JAR as a dependency with no main mod sources. Its 30 server
+GameTests also passed. Run `gradlew build runClientGameTest` there to validate the
+binary; the client entrypoint asserts that Fabric loaded the mod from a JAR.
+The release-candidate client run also passed, including that binary-origin assertion.
+
+One earlier clean-world run failed `dimensionalMountAndLeashChain`; subsequent
+source and binary server runs passed. Additional entity/holder diagnostics are
+retained. This intermittent result is unresolved and must not be described as a
+fixed gameplay defect. Keep the release a draft until this failure is understood,
+the two-real-client dedicated-server check is completed and the user's modpack
+acceptance is recorded.
+
+The same production JAR additionally passed all 30 server GameTests with
+Pushier Pistons 1.0, FrozenLib 2.5.3, Alex's Mobs Continued 2.1.9 and CodxLib 1.5.1
+(the installed Fabric 26.2 JARs). This does not constitute a full modpack playtest.

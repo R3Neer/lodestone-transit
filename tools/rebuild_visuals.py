@@ -109,9 +109,7 @@ for name, block in blocks.items():
     write(f'assets/{NS}/blockstates/{name}.json',{'variants':{'':{'model':f'{NS}:block/{name}'}}})
     write(f'assets/{NS}/items/{name}.json',{'model':model_ref(f'{NS}:block/{name}')})
 
-# The core reuses the nether-star silhouette with hand-placed amethyst sockets.
-texture('item/core_inlay',{(7,2):'ceb0f0',(8,2):'9970c3',(3,6):'a477cf',(12,6):'69458e',(7,12):'9970c3',(8,12):'69458e'})
-write(f'assets/{NS}/models/item/dimensional_core.json',{'parent':'minecraft:item/generated','textures':{'layer0':'minecraft:item/nether_star','layer1':f'{NS}:item/core_inlay'}})
+# The hand-painted Fractured Eye core is copied by craft_visuals.generate() below.
 write(f'assets/{NS}/items/dimensional_core.json',{'model':model_ref(f'{NS}:item/dimensional_core')})
 
 write(f'data/{NS}/recipe/calibrated_lodestone.json',{'type':'minecraft:crafting_shaped','category':'redstone','pattern':['CAC','CIC','CCC'],'key':{'C':'minecraft:chiseled_stone_bricks','A':'minecraft:amethyst_shard','I':'minecraft:iron_ingot'},'result':{'id':f'{NS}:calibrated_lodestone','count':1}})
@@ -165,3 +163,8 @@ for index,lang in enumerate(('en_us','es_es')):
                    'item.lodestone_transit.dimensional_recovery_teleporter':('Dimensional Recovery Teleporter','Teletransportador dimensional de recuperación')[index]})
     write(path,values)
 print('Generated vanilla-referenced compass frames, stone models, optional 3D bridge, recipes and messages.')
+
+# The approved handcrafted art replaces the earlier accent-only exploration.
+import craft_visuals
+craft_visuals.generate()
+craft_visuals.preview()

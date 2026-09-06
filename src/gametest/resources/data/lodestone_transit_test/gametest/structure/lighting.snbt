@@ -1,0 +1,7 @@
+{
+    DataVersion: 2730,
+    size: [16, 8, 24],
+    data: [],
+    entities: [],
+    palette: ["minecraft:air"]
+}

@@ -12,7 +12,7 @@ and leash graph transport, and activation cost/feedback. Fuel is debited by the
 caller before destination validation. Arrival candidates use half-block spacing,
 a spherical radius of five blocks, sampled foot support, clearance and hazard
 penalties. Secondary entities use a three-block radius and reserved arrival boxes.
-The registry and destination coordinates are never accepted through a clientbound
+The registry and destination coordinates are never accepted through a serverbound
 activation API: vanilla server item/block interactions invoke the service.
 
 Passenger transitions use Minecraft 26.2's own `Entity.teleport` implementation.
@@ -50,11 +50,16 @@ linked and named, but `TeleportResolver.resolveDetailed` permits travel only to
 calibrated blocks and returns a specific failure reason. `TravelMessage` owns
 localized action-bar feedback, including partial leash-group success.
 
-Item models reference vanilla's 32 compass frames and add small hand-authored
-inlays. `DeviceAppearance` normalizes existing recovery model overrides to the ordinary
+Portable items use original 16px casing, pointer and charge-fragment layers painted
+in Piskel through AI-operated computer use. The resource assembler generates 32
+nearest-neighbour pointer orientations for each of five charge states. The Core
+has its own 16px Fractured Eye texture. `DeviceAppearance` normalizes existing recovery model overrides to the ordinary
 portable model. Recovery changes its automatic name and compass target, with the
-same appearance and gameplay item ID. The optional p1kl bridge references external geometry and checks
-resource presence to select a flat fallback. A model-property registry accessor
+same appearance and gameplay item ID. The optional p1kl bridge uses original
+9 x 9 x 2 geometry and checks external resource presence to select a flat fallback.
+Stations use that instrument above a lodestone body and display 16 side fragments.
+Their pearl state also controls ordinary block light; portable items do not supply
+provider-specific dynamic-light integration. A model-property registry accessor
 is necessary because Minecraft exposes no public registration method there.
 
 ## Mixin boundaries

@@ -41,6 +41,45 @@ public final class TransitClientGameTest implements FabricClientGameTest {
             singleplayer.getServer().runOnServer(server -> { var registry=AnchorRegistry.get(server); registry.rename(registry.get(anchorId),Component.literal("North Tower")); });
             context.waitFor(client -> client.player.getMainHandItem().getHoverName().getString().contains("North Tower"));
             context.waitTicks(80);
+            // Every portable charge state must be available before inventory ticking.
+            context.runOnClient(client -> {
+                var property = new io.github.r3neer.lodestonetransit.item.ChargeModelProperty();
+                for (int count=0; count<=4; count++) {
+                    var stack = new ItemStack(LodestoneTransit.TELEPORTER);
+                    stack.set(LodestoneTransit.CHARGES,count);
+                    if (property.get(stack,client.level,null,0)!=count) throw new AssertionError("Charge property " + count);
+                    for (var item : new Item[]{LodestoneTransit.TELEPORTER,LodestoneTransit.DIMENSIONAL_TELEPORTER}) {
+                        var device = new ItemStack(item);
+                        if (count>0) device.set(LodestoneTransit.CHARGES,count);
+                        var lines = new ArrayList<Component>();
+                        DestinationNaming.tooltip(device,item==LodestoneTransit.DIMENSIONAL_TELEPORTER,true,lines::add);
+                        String expected = Component.translatable("transit.charges",count,4).getString();
+                        if (lines.stream().noneMatch(line -> line.getString().equals(expected))) throw new AssertionError("Missing tooltip count: " + expected);
+                    }
+                }
+            });
+            singleplayer.getServer().runOnServer(server -> {
+                var player=server.getPlayerList().getPlayers().getFirst();
+                for (int count=0;count<=4;count++) {
+                    var base=new ItemStack(LodestoneTransit.TELEPORTER); base.set(LodestoneTransit.CHARGES,count);
+                    var dim=new ItemStack(LodestoneTransit.DIMENSIONAL_TELEPORTER); dim.set(LodestoneTransit.CHARGES,count);
+                    player.getInventory().setItem(9+count,base); player.getInventory().setItem(18+count,dim);
+                }
+            });
+            for (int count=0;count<=16;count++) {
+                final int pearls=count;
+                singleplayer.getServer().runOnServer(server -> {
+                    var level=server.overworld();
+                    for (int x:new int[]{-2,2}) {
+                        var station=(io.github.r3neer.lodestonetransit.block.TeleportStationBlockEntity)level.getBlockEntity(new BlockPos(x,80,0));
+                        station.setItem(0,pearls==0 ? ItemStack.EMPTY : new ItemStack(Items.ENDER_PEARL,pearls));
+                    }
+                });
+                context.waitFor(client -> client.level.getBlockState(new BlockPos(-2,80,0)).getValue(io.github.r3neer.lodestonetransit.block.TeleportStationBlock.PEARLS)==pearls
+                    && client.level.getBlockState(new BlockPos(2,80,0)).getValue(io.github.r3neer.lodestonetransit.block.TeleportStationBlock.PEARLS)==pearls);
+                context.waitFor(client -> client.level.getBrightness(net.minecraft.world.level.LightLayer.BLOCK,new BlockPos(-3,80,0))==Math.max(0,pearls/4-1)
+                    && client.level.getBrightness(net.minecraft.world.level.LightLayer.BLOCK,new BlockPos(3,80,0))==Math.max(0,(pearls/4)*2-1));
+            }
             context.takeScreenshot("lodestone-transit-world");
             context.runOnClient(client -> {
                 if (!DestinationNaming.destination(client.player.getMainHandItem()).getString().equals("North Tower")) throw new AssertionError("Anchor rename was not synchronized");
@@ -49,6 +88,27 @@ public final class TransitClientGameTest implements FabricClientGameTest {
             context.waitTicks(10);
             context.takeScreenshot("lodestone-transit-inventory");
             context.setScreen(() -> null);
+            context.runOnClient(client -> client.player.getInventory().setSelectedSlot(2));
+            context.waitFor(client -> client.player.getMainHandItem().is(LodestoneTransit.CORE));
+            context.waitTicks(60);
+            context.takeScreenshot("dimensional-core-hand");
+            context.runOnClient(client -> client.player.getInventory().setSelectedSlot(0));
+            context.waitFor(client -> client.player.getMainHandItem().is(LodestoneTransit.TELEPORTER));
+            singleplayer.getServer().runOnServer(server -> {
+                var player=server.getPlayerList().getPlayers().getFirst();
+                player.teleport(new TeleportTransition(server.overworld(),new Vec3(.5,82,3.6),Vec3.ZERO,180,47,TeleportTransition.DO_NOTHING));
+                player.setNoGravity(true);
+            });
+            context.waitTicks(15);
+            context.takeScreenshot("station-relief-and-full-fragments");
+            singleplayer.getServer().runOnServer(server -> server.getCommands().performPrefixedCommand(server.createCommandSourceStack(),"time set midnight"));
+            context.waitTicks(30);
+            context.takeScreenshot("station-light-night");
+            singleplayer.getServer().runOnServer(server -> server.getCommands().performPrefixedCommand(server.createCommandSourceStack(),"time set noon"));
+            singleplayer.getServer().runOnServer(server -> {
+                var player=server.getPlayerList().getPlayers().getFirst(); player.setNoGravity(false);
+                player.teleport(new TeleportTransition(server.overworld(),new Vec3(.5,80,5.5),Vec3.ZERO,180,24,TeleportTransition.DO_NOTHING));
+            });
             var heard = new java.util.concurrent.ConcurrentLinkedQueue<String>();
             net.minecraft.client.sounds.SoundEventListener listener = (sound, event, range) -> heard.add(sound.getIdentifier().toString());
             context.runOnClient(client -> client.getSoundManager().addListener(listener));

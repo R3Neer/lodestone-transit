@@ -28,6 +28,10 @@ fabricApi {
     }
 }
 jar { from('LICENSE') { rename { "${it}_lodestone-transit" } } }
+tasks.withType(AbstractArchiveTask).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
 
 // Optional, locally supplied upstream pack; no third-party artwork is redistributed.
 if (providers.gradleProperty('p1klResourcePack').isPresent()) {

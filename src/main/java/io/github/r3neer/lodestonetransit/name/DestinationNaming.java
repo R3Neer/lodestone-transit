@@ -35,7 +35,8 @@ public final class DestinationNaming {
     public static void tooltip(ItemStack stack, boolean dimensional, boolean portable, Consumer<Component> out) {
         if (dimensional) out.accept(Component.translatable("transit.dimensional").withStyle(ChatFormatting.LIGHT_PURPLE));
         out.accept(Component.translatable("transit.destination", destination(stack)).withStyle(ChatFormatting.GRAY));
-        if (portable) out.accept(Component.translatable("transit.charges", stack.getOrDefault(LodestoneTransit.CHARGES, 0), 4).withStyle(ChatFormatting.GRAY));
+        if (portable) out.accept(Component.translatable("transit.charges",
+            Math.clamp(stack.getOrDefault(LodestoneTransit.CHARGES, 0), 0, 4), 4).withStyle(ChatFormatting.GRAY));
         var d = stack.get(LodestoneTransit.DESTINATION);
         if (d != null && d.anchorId().isPresent()) {
             var a = CLIENT_ANCHORS.get(d.anchorId().get());

@@ -1,7 +1,1 @@
-{
-  "variants": {
-    "": {
-      "model": "lodestone_transit:block/dimensional_teleport_station"
-    }
-  }
-}
+{"variants":{"pearls=0":{"model":"lodestone_transit:block/dimensional_teleport_station_0"},"pearls=1":{"model":"lodestone_transit:block/dimensional_teleport_station_1"},"pearls=2":{"model":"lodestone_transit:block/dimensional_teleport_station_2"},"pearls=3":{"model":"lodestone_transit:block/dimensional_teleport_station_3"},"pearls=4":{"model":"lodestone_transit:block/dimensional_teleport_station_4"},"pearls=5":{"model":"lodestone_transit:block/dimensional_teleport_station_5"},"pearls=6":{"model":"lodestone_transit:block/dimensional_teleport_station_6"},"pearls=7":{"model":"lodestone_transit:block/dimensional_teleport_station_7"},"pearls=8":{"model":"lodestone_transit:block/dimensional_teleport_station_8"},"pearls=9":{"model":"lodestone_transit:block/dimensional_teleport_station_9"},"pearls=10":{"model":"lodestone_transit:block/dimensional_teleport_station_10"},"pearls=11":{"model":"lodestone_transit:block/dimensional_teleport_station_11"},"pearls=12":{"model":"lodestone_transit:block/dimensional_teleport_station_12"},"pearls=13":{"model":"lodestone_transit:block/dimensional_teleport_station_13"},"pearls=14":{"model":"lodestone_transit:block/dimensional_teleport_station_14"},"pearls=15":{"model":"lodestone_transit:block/dimensional_teleport_station_15"},"pearls=16":{"model":"lodestone_transit:block/dimensional_teleport_station_16"}}}
