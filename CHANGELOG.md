@@ -34,7 +34,7 @@ load. Downgrading worlds after using this beta is not supported or tested.
 
 ### Known limits
 
-A clean-world automated run intermittently failed dimensional leash-chain reconstruction; later source and binary runs passed. The cause remains under investigation, so this candidate remains a draft.
+A clean-world automated run intermittently failed dimensional leash-chain reconstruction; later source and binary runs passed. The cause remains under investigation as a known beta risk.
 
 This is a beta. Full modpack playtesting and a two-real-client dedicated-server
 session remain acceptance checks, not claims established by automated GameTests.
